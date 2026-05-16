@@ -9,9 +9,18 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "format": "biome format --write .",
+    "check": "biome check --write ."
   },
   "dependencies": {
-    "astro": "^6.3.3"
+    "@fontsource-variable/dm-sans": "^5.2.8",
+    "@fontsource-variable/raleway": "^5.2.8",
+    "@tailwindcss/vite": "^4.3.0",
+    "astro": "^6.3.3",
+    "tailwindcss": "^4.3.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.4.15"
   }
 }

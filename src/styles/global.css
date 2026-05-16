@@ -1,0 +1,141 @@
+@import 'tailwindcss';
+
+:root {
+    /* --background: #ffffff;
+   --foreground: #171717; */
+    --background: #0a0a0a;
+    --foreground: #ededed;
+}
+
+@theme inline {
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --font-heading: "Raleway Variable", sans-serif;
+    --font-body: "DM Sans Variable", sans-serif;
+}
+
+
+@layer base {
+
+    body {
+        background: var(--background);
+        color: var(--foreground);
+        font-family: var(--font-body);
+    }
+
+    main {
+        @apply grow max-w-5xl mx-auto w-full
+    }
+
+    h1 {
+        @apply text-4xl md:text-6xl font-bold text-white font-heading tracking-tight my-8
+    }
+
+    h2 {
+        @apply text-2xl md:text-3xl font-bold text-white font-heading
+    }
+
+    h3 {
+        @apply text-lg font-semibold text-white font-heading
+    }
+
+    p {
+        @apply text-gray-400
+    }
+
+    p .important {
+        @apply text-gray-300
+    }
+}
+
+@layer components {
+    .input {
+        @apply w-[300px] sm:w-[350px] block border text-gray-300 font-semibold border-gray-800 rounded-xl px-4 pt-5 md:pt-7 pb-2 bg-gray-900/50 placeholder-transparent outline-blue-500 mx-auto
+    }
+
+    .smallText {
+        @apply text-sm text-gray-500
+    }
+
+    .hero-label {
+        @apply text-sm text-blue-400 tracking-widest uppercase mb-6
+    }
+
+    .formError {
+        @apply text-red-500 text-center my-1 text-sm
+    }
+
+    .formSuccess {
+        @apply !text-blue-500 my-1 text-center
+    }
+}
+
+/* Neutraliser le comportement d'autofill */
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+    transition:
+        background-color 600000s 0s,
+        color 600000s 0s;
+}
+
+input[data-autocompleted] {
+    background-color: transparent !important;
+}
+
+/* Déplace le background-position de gauche à droite en boucle — utilisé pour animer les dégradés des bordures de Section alternate */
+.gradient-xy {
+    animation: gradient-xy 3s ease infinite;
+}
+
+@keyframes gradient-xy {
+
+    0%,
+    100% {
+        background-position: left center;
+    }
+
+    50% {
+        background-position: right center;
+    }
+}
+
+.animate-fade-in {
+    opacity: 1;
+}
+
+/* globals.css */
+/* Déplace le background-position de 0% à 200% en boucle — utilisé pour la bordure animée bleue→violette→bleue */
+.animated-border {
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6, #3b82f6);
+    background-size: 200% 100%;
+    animation: gradient-move 0.5s linear infinite;
+}
+
+@keyframes gradient-move {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 200% 50%;
+    }
+}
+
+/* Étend un élément de width 0 à 2rem — utilisé pour la ligne décorative sous le hero-label */
+@keyframes expand-x {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 10rem;
+    }
+}
+
+.animate-expand-x {
+    display: block;
+    height: 1px;
+    width: 0;
+    animation: expand-x 0.5s ease forwards;
+    animation-delay: 200ms;
+}
