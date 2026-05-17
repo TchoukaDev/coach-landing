@@ -1,0 +1,53 @@
+---
+import Container from "../ui/Container.astro";
+import Section from "../ui/Section.astro";
+
+const testimonials = [
+  {
+    quote:
+      "Très satisfaite du travail fourni pour la création de mon site internet. Un développeur professionnel et passionné, de bon conseil et à l'écoute de mes besoins, disponible et très réactif. Le résultat dépasse largement mes attentes.",
+    name: "Clothilde Baudet",
+    role: "Psychologue clinicienne",
+  },
+  {
+    quote:
+      "Romain a créé un site pour notre activité LCMA, ce site est très convivial avec un design attractif, une navigation fluide et agréable et la présentation des différentes pages est claire. Romain est à l'écoute pour nos différentes questions. Je le recommande fortement.",
+    name: "Séverine",
+    role: "LCMA",
+  },
+];
+---
+
+<Section variant="alt">
+  <Container size="md">
+    <h2 class="text-sm uppercase tracking-widest text-accent font-medium mb-16">
+      Ils en parlent
+    </h2>
+
+    <div class="grid md:grid-cols-2 gap-8">
+      {
+        testimonials.map((t) => (
+          <figure class="relative flex flex-col justify-between gap-8 p-10 border border-white/10 rounded-2xl overflow-hidden bg-bg-dark">
+            {/* Guillemet décoratif */}
+            <span
+              aria-hidden="true"
+              class="absolute -top-4 -left-2 font-heading font-bold text-accent/15 select-none leading-none"
+              style="font-size: clamp(8rem, 15vw, 12rem)"
+            >
+              "
+            </span>
+
+            <blockquote class="relative font-heading text-xl leading-relaxed text-text-on-dark">
+              {t.quote}
+            </blockquote>
+
+            <figcaption class="relative border-t border-white/10 pt-6">
+              <p class="font-semibold text-text-on-dark">{t.name}</p>
+              <p class="text-sm text-text-on-dark-muted mt-1">{t.role}</p>
+            </figcaption>
+          </figure>
+        ))
+      }
+    </div>
+  </Container>
+</Section>
