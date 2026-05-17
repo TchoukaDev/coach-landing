@@ -1,0 +1,100 @@
+---
+import Container from "./ui/Container.astro";
+
+const steps = [
+  {
+    number: "01",
+    title: "Appel découverte",
+    description: "On vérifie que le projet fait sens, on se présente.",
+  },
+  {
+    number: "02",
+    title: "Cadrage & récolte",
+    description:
+      "On définit ton offre, ton identité, ce que tu veux transmettre.",
+  },
+  {
+    number: "03",
+    title: "Création",
+    description: "Je conçois et code ta landing page.",
+  },
+  {
+    number: "04",
+    title: "Retour & livraison",
+    description: "Tu valides, j'ajuste, tu reçois ta page clé en main.",
+  },
+];
+---
+
+<!-- Wrapper overflow-hidden séparé de la section pinée -->
+<div class="overflow-hidden bg-bg-light-alt">
+  <section id="process-section" class="py-24 mx-auto">
+    <Container>
+      <div class="px-6">
+        <h2
+          class="text-sm uppercase tracking-widest text-accent font-medium mb-4"
+        >
+          Mon process
+        </h2>
+        <p class="text-3xl md:text-4xl font-heading text-text-on-light">
+          De zéro à ta page en ligne,<br />en 4 étapes.
+        </p>
+      </div>
+    </Container>
+
+    <ol
+      id="process-track"
+      class="flex flex-col gap-6 mt-16 px-6 list-none
+             md:flex-row md:flex-nowrap"
+    >
+      {
+        steps.map((step) => (
+          <li
+            class="bg-bg-light rounded-2xl p-8 flex flex-col gap-4
+                   w-full md:min-w-[32vw] md:max-w-[38vw] md:shrink-0"
+          >
+            <span class="font-heading text-5xl font-bold text-accent/20 leading-none">
+              {step.number}
+            </span>
+            <h3 class="text-xl font-heading font-semibold text-text-on-light">
+              {step.title}
+            </h3>
+            <p class="text-text-on-light-muted text-base leading-relaxed">
+              {step.description}
+            </p>
+          </li>
+        ))
+      }
+      <!-- Spacer droit -->
+      <li aria-hidden="true" class="hidden md:block md:min-w-[8vw] md:shrink-0">
+      </li>
+    </ol>
+  </section>
+</div>
+
+<script>
+  import gsap from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const section = document.getElementById("process-section");
+  const track = document.getElementById("process-track");
+
+  if (section && track) {
+    gsap.matchMedia().add("(min-width: 768px)", () => {
+      gsap.to(track, {
+        x: () => -(track.scrollWidth - window.innerWidth),
+        ease: "none",
+        scrollTrigger: {
+          trigger: section,
+          start: "top top",
+          end: () => `+=${track.scrollWidth - window.innerWidth}`,
+          pin: true,
+          scrub: 1,
+          invalidateOnRefresh: true,
+        },
+      });
+    });
+  }
+</script>
