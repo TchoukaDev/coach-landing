@@ -1,122 +1,167 @@
-# Animation GSAP — Section Process
+# Animation — Section Process (scroll horizontal)
 
-## Ce que fait l'animation
-
-La section Process présente 4 étapes en scroll horizontal sur desktop.
-Quand l'utilisateur scrolle vers le bas, les cartes défilent de gauche à droite.
-La section reste fixe à l'écran pendant toute la durée du scroll.
-
-Sur mobile (< 768px) : les cartes sont empilées verticalement, aucune animation.
+> Implémentée en vanilla JS + CSS sticky. GSAP a été tenté puis abandonné —
+> ScrollTrigger ajoute une couche d'abstraction qui complique le debug sans
+> apporter de valeur réelle sur un effet aussi ciblé. Le vanilla est ici
+> plus prévisible et plus facile à maintenir.
 
 ---
 
-## Structure HTML impliquée
+## Principe général
+
+Le scroll vertical est "converti" en déplacement horizontal des cartes.
+L'utilisateur scrolle normalement vers le bas — les cartes défilent vers la gauche.
+
+Deux mécanismes CSS rendent ça possible :
+
+1. **`position: sticky`** — la section reste collée en haut du viewport pendant
+   que l'utilisateur scrolle à l'intérieur du wrapper
+2. **`translateX`** appliqué par JS — les cartes se déplacent horizontalement
+   en fonction de la progression du scroll dans le wrapper
+
+---
+
+## Structure HTML
 
 ```
-<div class="overflow-hidden">          ← clips le débordement visuel des cartes
-  <section id="process-section">       ← élément pîné par GSAP
-    <ol id="process-track">            ← élément déplacé horizontalement
-      <li> ... </li>                   ← cartes (md:min-w-[32vw])
-      <li aria-hidden> </li>           ← spacer droit (md:min-w-[8vw])
+<div id="process-wrapper">          ← hauteur dynamique (JS), donne la "matière à scroller"
+  <section id="process-section">    ← sticky top-0, h-screen → reste collée pendant le scroll
+    <ol id="process-track">         ← translateX appliqué par JS
+      <li> carte 01 </li>
+      <li> carte 02 </li>
+      <li> carte 03 </li>
+      <li> carte 04 </li>
+      <li aria-hidden> </li>        ← spacer droit (évite que la dernière carte soit au bord)
     </ol>
   </section>
 </div>
 ```
 
-**Pourquoi le wrapper overflow-hidden est séparé de la section pinée ?**
-GSAP insère un "spacer" dans le DOM quand il pine un élément (pour compenser la place qu'il prend dans le flux). Si overflow-hidden est sur la section pinée elle-même, ça interfère avec ce mécanisme et l'animation se casse.
+**Pourquoi un wrapper séparé de la section ?**
 
-**Pourquoi un spacer `<li>` à la fin ?**
-`scrollWidth` du track inclut le contenu mais pas toujours le padding CSS droit dans un flex overflow. Le spacer est une solution fiable pour garantir un espace après la dernière carte.
+La section est `sticky` — elle ne contribue plus à la hauteur du flux normal.
+Le wrapper lui donne une "zone d'action" : tant que le scroll est dans le wrapper,
+la section reste collée. Quand le scroll dépasse le wrapper, la section se décolle
+et reprend son comportement normal.
 
 ---
 
-## Le script GSAP
+## Calcul JS — étape par étape
 
 ```js
-gsap.registerPlugin(ScrollTrigger);
+const maxTranslate = track.scrollWidth - window.innerWidth + 48;
 ```
-ScrollTrigger est un plugin séparé — il doit être enregistré avant d'être utilisé.
 
----
+- `track.scrollWidth` = largeur totale du track (toutes les cartes + gaps)
+- `window.innerWidth` = ce qui est visible
+- La différence = ce qu'il faut faire défiler pour tout voir
+- `+ 48` = padding droit (évite que la dernière carte arrive pile au bord)
 
 ```js
-gsap.matchMedia().add("(min-width: 768px)", () => { ... });
+wrapper.style.height = `calc(100vh + ${maxTranslate}px)`;
 ```
-L'animation ne s'applique qu'en desktop (≥ 768px).
-Quand on passe en dessous, GSAP nettoie automatiquement le pin et les transforms.
 
----
+Le wrapper doit être assez haut pour "consommer" le scroll nécessaire.
+- `100vh` = la section elle-même
+- `+ maxTranslate` = les pixels de scroll supplémentaires pour traverser toutes les cartes
+
+La section se décolle exactement quand `progress = 1` (scroll terminé).
 
 ```js
-gsap.to(track, {
-  x: () => -(track.scrollWidth - window.innerWidth),
-  ...
-});
+const wrapperTop = wrapper.offsetTop;
 ```
-Déplace le track vers la gauche.
 
-- `track.scrollWidth` = largeur totale du track (toutes les cartes + spacer)
-- `window.innerWidth` = largeur visible du viewport
-- La différence = distance à parcourir pour tout voir
-- Le signe `-` = vers la gauche
+`offsetTop` = position statique du wrapper depuis le haut de la page.
+**Utiliser `getBoundingClientRect().top` serait une erreur** : cette valeur change
+à chaque pixel scrollé, rendant le calcul instable.
 
-**Pourquoi une fonction `() =>`  et pas une valeur directe ?**
-Avec `invalidateOnRefresh: true`, GSAP recalcule les valeurs quand la fenêtre est redimensionnée. Pour que ça fonctionne, les valeurs doivent être des fonctions (appelées au moment du recalcul), pas des nombres figés au chargement.
+```js
+const scrollable = wrapper.offsetHeight - window.innerHeight;
+```
+
+La plage de `scrollY` où la section est active :
+- `wrapper.offsetHeight` = hauteur totale du wrapper (= `100vh + maxTranslate`)
+- `- window.innerHeight` = on enlève la hauteur de la section elle-même
+
+Résultat : `scrollable = maxTranslate`. La plage active = exactement la distance
+horizontale à parcourir. Ce n'est pas une coïncidence — c'est pourquoi on dimensionne
+le wrapper avec `calc(100vh + ${maxTranslate}px)`.
+
+```js
+const scrolled = window.scrollY - wrapperTop;
+const progress = Math.max(0, Math.min(1, scrolled / scrollable));
+```
+
+- `scrolled` = combien on a scrollé depuis l'entrée dans le wrapper
+- `progress` = valeur entre 0 et 1 (clampée pour éviter les débordements)
+
+```js
+track.style.transform = `translateX(${-progress * maxTranslate}px)`;
+```
+
+- `progress = 0` → `translateX(0)` → cartes à leur position initiale
+- `progress = 1` → `translateX(-maxTranslate)` → dernière carte visible
 
 ---
 
+## Cas particulier : grand écran
+
 ```js
-scrollTrigger: {
-  trigger: section,   // l'élément qui déclenche l'animation
-  start: "top top",   // quand le haut de la section atteint le haut du viewport
-  end: () => `+=${track.scrollWidth - window.innerWidth}`, // durée en pixels de scroll
-  pin: true,          // fixe la section pendant l'animation
-  scrub: 1,           // lie le mouvement au scroll (1 = léger délai en secondes)
-  invalidateOnRefresh: true, // recalcule au resize
+if (maxTranslate <= 48) {
+  wrapper.style.height = "";
+  track.style.transform = "";
+  track.style.justifyContent = "center";
+  return;
 }
 ```
 
-### Détail de `start` et `end`
+Quand toutes les cartes tiennent dans le viewport (ex: écran 2K), `maxTranslate`
+est nul ou négatif. Aucun scroll nécessaire — les cartes sont centrées et
+l'animation est désactivée.
 
-`start: "top top"` — syntaxe GSAP : `"[repère sur l'élément] [repère sur le viewport]"`
+---
 
-| Valeur | Signification |
-|--------|--------------|
-| `"top top"` | haut de la section → haut de l'écran |
-| `"top center"` | haut de la section → milieu de l'écran |
-| `"center top"` | milieu de la section → haut de l'écran |
+## Comportement au resize
 
-`end: () => `+=${distance}`` — le `+=` signifie "X pixels de scroll supplémentaires après le start".
-Ici, on scrolle autant de pixels qu'il y a de contenu à révéler — le pin dure exactement le temps de traverser toutes les cartes.
+`update()` est appelée à chaque `resize`. Elle recalcule :
+- `maxTranslate` (les cartes ont peut-être changé de taille)
+- `wrapper.style.height`
+- La position courante des cartes
 
-### Détail de `scrub`
-
-| Valeur | Effet |
-|--------|-------|
-| `true` | suivi immédiat du scroll |
-| `1` | léger délai de 1 seconde (effet fluide) |
-| `2` | délai plus marqué |
+Pas besoin d'un cleanup : `transform` et `height` sont simplement écrasés.
 
 ---
 
 ## Récapitulatif visuel
 
 ```
-Avant scroll :
+État initial (scroll = 0 dans le wrapper) :
 ┌──────────── viewport ────────────┐
-│ [01 Appel]  [02 Cadrage]  [03.. │  section visible
+│ [01 Appel]  [02 Cadrage]  [03.. │
 └──────────────────────────────────┘
- [01]  [02]  [03]  [04]  [spacer]
- ↑ track entier (déborde à droite)
+ [01]  [02]  [03]  [04]  [· · ·]
+         track complet → déborde à droite
 
-Pendant scroll (section pinée) :
+Milieu (progress = 0.5) :
 ┌──────────── viewport ────────────┐
-│  [02 Cadrage]  [03 Création]  [0│  track glisse vers la gauche
+│   [02 Cadrage]  [03 Création]   │
 └──────────────────────────────────┘
 
-Fin du scroll :
+Fin (progress = 1) :
 ┌──────────── viewport ────────────┐
-│  [03 Création]  [04 Livraison]  │  dernier groupe visible + spacer
+│  [03 Création]  [04 Livraison]  │
 └──────────────────────────────────┘
+                         [spacer]→|
 ```
+
+---
+
+## Pourquoi pas GSAP ?
+
+GSAP ScrollTrigger est puissant pour des animations complexes (timelines,
+pinning de plusieurs éléments, séquençage). Ici, l'effet se résume à un
+mapping `scrollY → translateX`. Vanilla suffit amplement et évite :
+
+- Une dépendance externe (~60kb)
+- La couche d'abstraction de ScrollTrigger qui masque ce qui se passe vraiment
+- Les conflits potentiels avec `matchMedia` et le resize handling

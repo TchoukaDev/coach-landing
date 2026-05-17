@@ -1,8 +1,6 @@
 @import 'tailwindcss';
 
 :root {
-    /* --background: #ffffff;
-   --foreground: #171717; */
     --background: #FAFAF7;
     --foreground: #2C2420;
 }
@@ -30,9 +28,7 @@
     --color-text-on-light-muted: #7A6860;
 }
 
-
 @layer base {
-
     body {
         background: var(--background);
         color: var(--foreground);
@@ -40,26 +36,22 @@
     }
 
     main {
-        @apply grow mx-auto w-full
+        @apply grow mx-auto w-full;
     }
 
+    /* Pas de couleur globale sur h2/h3 — chaque composant gère son contexte clair/sombre */
     h1 {
-        @apply text-4xl md:text-6xl font-bold font-heading tracking-tight my-8 text-accent-muted
+        @apply text-4xl md:text-6xl font-bold font-heading tracking-tight my-8 text-text-on-dark;
     }
 
     h2 {
-        @apply text-2xl md:text-3xl font-bold text-white font-heading
+        @apply font-heading font-bold;
     }
 
     h3 {
-        @apply text-lg font-semibold text-white font-heading
+        @apply font-heading font-semibold;
     }
-
-
-
 }
-
-
 
 /* Neutraliser le comportement d'autofill */
 input:-webkit-autofill,
@@ -73,46 +65,7 @@ input[data-autocompleted] {
     background-color: transparent !important;
 }
 
-/* Déplace le background-position de gauche à droite en boucle — utilisé pour animer les dégradés des bordures de Section alternate */
-.gradient-xy {
-    animation: gradient-xy 3s ease infinite;
-}
-
-@keyframes gradient-xy {
-
-    0%,
-    100% {
-        background-position: left center;
-    }
-
-    50% {
-        background-position: right center;
-    }
-}
-
-.animate-fade-in {
-    opacity: 1;
-}
-
-/* globals.css */
-/* Déplace le background-position de 0% à 200% en boucle — utilisé pour la bordure animée bleue→violette→bleue */
-.animated-border {
-    background: linear-gradient(90deg, #3b82f6, #8b5cf6, #3b82f6);
-    background-size: 200% 100%;
-    animation: gradient-move 0.5s linear infinite;
-}
-
-@keyframes gradient-move {
-    0% {
-        background-position: 0% 50%;
-    }
-
-    100% {
-        background-position: 200% 50%;
-    }
-}
-
-/* Étend un élément de width 0 à 2rem — utilisé pour la ligne décorative sous le hero-label */
+/* Ligne décorative animée — utilisée dans Hero */
 @keyframes expand-x {
     from {
         width: 0;

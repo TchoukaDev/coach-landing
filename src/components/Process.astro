@@ -26,11 +26,21 @@ const steps = [
 ];
 ---
 
-<!-- Wrapper overflow-hidden séparé de la section pinée -->
-<div class="overflow-hidden bg-bg-light-alt">
-  <section id="process-section" class="py-24 mx-auto">
-    <Container>
-      <div class="px-6">
+<!--
+  Le wrapper donne la "hauteur de scroll" nécessaire.
+  Sa hauteur est définie en JS : 100vh + distance horizontale à parcourir.
+-->
+<div id="process-wrapper" class="bg-bg-light-alt">
+  <!--
+    La section est sticky : elle reste collée en haut pendant que
+    l'utilisateur scroll dans le wrapper.
+  -->
+  <section
+    id="process-section"
+    class="py-24 px-6 md:sticky md:top-0 md:h-screen md:overflow-hidden mx-auto"
+  >
+    <Container size="md">
+      <div class="mb-16 self-start">
         <h2
           class="text-sm uppercase tracking-widest text-accent font-medium mb-4"
         >
@@ -44,14 +54,15 @@ const steps = [
 
     <ol
       id="process-track"
-      class="flex flex-col gap-6 mt-16 px-6 list-none
+      class="flex gap-6 px-6 list-none will-change-transform
+             flex-col
              md:flex-row md:flex-nowrap"
     >
       {
         steps.map((step) => (
           <li
             class="bg-bg-light rounded-2xl p-8 flex flex-col gap-4
-                   w-full md:min-w-[32vw] md:max-w-[38vw] md:shrink-0"
+                   w-full md:min-w-[clamp(280px,32vw,420px)] md:max-w-[420px] md:shrink-0"
           >
             <span class="font-heading text-5xl font-bold text-accent/20 leading-none">
               {step.number}
@@ -65,36 +76,46 @@ const steps = [
           </li>
         ))
       }
-      <!-- Spacer droit -->
-      <li aria-hidden="true" class="hidden md:block md:min-w-[8vw] md:shrink-0">
-      </li>
     </ol>
   </section>
 </div>
 
 <script>
-  import gsap from "gsap";
-  import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-  gsap.registerPlugin(ScrollTrigger);
-
-  const section = document.getElementById("process-section");
+  const wrapper = document.getElementById("process-wrapper");
   const track = document.getElementById("process-track");
 
-  if (section && track) {
-    gsap.matchMedia().add("(min-width: 768px)", () => {
-      gsap.to(track, {
-        x: () => -(track.scrollWidth - window.innerWidth),
-        ease: "none",
-        scrollTrigger: {
-          trigger: section,
-          start: "top top",
-          end: () => `+=${track.scrollWidth - window.innerWidth}`,
-          pin: true,
-          scrub: 1,
-          invalidateOnRefresh: true,
-        },
-      });
-    });
+  if (wrapper && track) {
+    function update() {
+      if (window.innerWidth < 768) {
+        wrapper.style.height = "";
+        track.style.transform = "";
+        track.style.justifyContent = "";
+        return;
+      }
+
+      const maxTranslate = track.scrollWidth - window.innerWidth + 48;
+
+      // Toutes les cartes tiennent dans le viewport : centrer, pas d'animation
+      if (maxTranslate <= 48) {
+        wrapper.style.height = "";
+        track.style.transform = "";
+        track.style.justifyContent = "center";
+        return;
+      }
+
+      track.style.justifyContent = "";
+      wrapper.style.height = `calc(100vh + ${maxTranslate}px)`;
+
+      const wrapperTop = wrapper.offsetTop;
+      const scrollable = wrapper.offsetHeight - window.innerHeight;
+      const scrolled = window.scrollY - wrapperTop;
+      const progress = Math.max(0, Math.min(1, scrolled / scrollable));
+
+      track.style.transform = `translateX(${-progress * maxTranslate}px)`;
+    }
+
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update, { passive: true });
+    update();
   }
 </script>
