@@ -1,0 +1,62 @@
+---
+import Container from "../ui/Container.astro";
+
+const inclusions = [
+  "Design sur-mesure à ton image",
+  "Copywriting rédigé avec toi",
+  "Modification des textes en autonomie",
+  "Déploiement en ligne inclus",
+  "Code source livré, tu es propriétaire",
+  "Support 1 mois après livraison",
+];
+---
+
+<section
+  id="offer-section"
+  class="md:fixed md:inset-0 z-20 bg-bg-dark flex items-center py-24 will-change-transform min-h-screen"
+>
+  <style>
+    @media (min-width: 768px) {
+      #offer-section {
+        transform: translateY(100vh);
+      }
+    }
+  </style>
+  <Container size="md">
+    <h2 class="text-sm uppercase tracking-widest text-accent font-medium mb-16">
+      L'offre
+    </h2>
+
+    <div
+      class="flex flex-col md:flex-row items-center md:items-start md:justify-between gap-16"
+    >
+      <div class="shrink-0">
+        <p class="font-heading text-text-on-dark-muted text-base mb-2">
+          Tarif unique
+        </p>
+        <p
+          class="font-heading font-bold text-text-on-dark leading-none"
+          style="font-size: clamp(5rem, 15vw, 9rem)"
+        >
+          500€
+        </p>
+        <p class="text-accent font-medium mt-6 text-lg">
+          Livraison en 7 jours max
+        </p>
+      </div>
+
+      <ul class="flex flex-col gap-5 flex-1 max-w-sm list-none">
+        {
+          inclusions.map((item) => (
+            <li class="flex items-start gap-4 text-text-on-dark">
+              <span class="text-accent mt-0.5 text-lg leading-none shrink-0">
+                ✓
+              </span>
+              <span class="text-base leading-snug">{item}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </Container>
+</section>

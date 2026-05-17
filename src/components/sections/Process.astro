@@ -1,5 +1,5 @@
 ---
-import Container from "./ui/Container.astro";
+import Container from "../ui/Container.astro";
 
 const steps = [
   {
@@ -28,7 +28,7 @@ const steps = [
 
 <!--
   Le wrapper donne la "hauteur de scroll" nécessaire.
-  Sa hauteur est définie en JS : 100vh + distance horizontale à parcourir.
+  Sa hauteur est définie en JS : 100vh + scroll horizontal + pause + animation de recouvrement.
 -->
 <div id="process-wrapper" class="bg-bg-light-alt">
   <!--
@@ -83,39 +83,55 @@ const steps = [
 <script>
   const wrapper = document.getElementById("process-wrapper");
   const track = document.getElementById("process-track");
+  const offer = document.getElementById("offer-section");
 
-  if (wrapper && track) {
-    function update() {
-      if (window.innerWidth < 768) {
-        wrapper.style.height = "";
-        track.style.transform = "";
-        track.style.justifyContent = "";
-        return;
-      }
+  function update() {
+    if (!wrapper || !track) return;
 
-      const maxTranslate = track.scrollWidth - window.innerWidth + 48;
+    const vh = window.innerHeight;
+    const coverPause = Math.round(vh * 0.15);
+    const coverDistance = Math.round(vh * 0.6);
 
-      // Toutes les cartes tiennent dans le viewport : centrer, pas d'animation
-      if (maxTranslate <= 48) {
-        wrapper.style.height = "";
-        track.style.transform = "";
-        track.style.justifyContent = "center";
-        return;
-      }
-
+    if (window.innerWidth < 768) {
+      wrapper.style.height = "";
+      track.style.transform = "";
       track.style.justifyContent = "";
-      wrapper.style.height = `calc(100vh + ${maxTranslate}px)`;
-
-      const wrapperTop = wrapper.offsetTop;
-      const scrollable = wrapper.offsetHeight - window.innerHeight;
-      const scrolled = window.scrollY - wrapperTop;
-      const progress = Math.max(0, Math.min(1, scrolled / scrollable));
-
-      track.style.transform = `translateX(${-progress * maxTranslate}px)`;
+      if (offer) { offer.style.transform = ""; offer.style.position = ""; }
+      return;
     }
 
-    window.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update, { passive: true });
-    update();
+    if (offer) offer.style.position = "";
+
+    const maxTranslate = track.scrollWidth - window.innerWidth + 48;
+    const hasHScroll = maxTranslate > 48;
+
+    if (hasHScroll) {
+      track.style.justifyContent = "";
+      wrapper.style.height = `calc(100vh + ${maxTranslate + coverPause + coverDistance}px)`;
+    } else {
+      // Cartes centrées, pas de scroll horizontal — wrapper réduit à la phase cover seule
+      track.style.justifyContent = "center";
+      track.style.transform = "";
+      wrapper.style.height = `calc(100vh + ${coverPause + coverDistance}px)`;
+    }
+
+    const wrapperTop = wrapper.offsetTop;
+    const scrolled = window.scrollY - wrapperTop;
+
+    if (hasHScroll) {
+      const hProgress = Math.max(0, Math.min(1, scrolled / maxTranslate));
+      track.style.transform = `translateX(${-hProgress * maxTranslate}px)`;
+    }
+
+    if (offer) {
+      const coverStart = hasHScroll ? maxTranslate + coverPause : coverPause;
+      const coverProgress = Math.max(0, Math.min(1, (scrolled - coverStart) / coverDistance));
+      offer.style.transform = `translateY(${(1 - coverProgress) * 100}vh)`;
+      offer.style.boxShadow = coverProgress > 0 ? "0 -16px 40px rgba(0,0,0,0.5)" : "";
+    }
   }
+
+  window.addEventListener("scroll", update, { passive: true });
+  window.addEventListener("resize", update, { passive: true });
+  update();
 </script>

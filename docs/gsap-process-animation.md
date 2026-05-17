@@ -1,5 +1,8 @@
 # Animation — Section Process (scroll horizontal)
 
+> Le script de Process gère aussi l'animation de recouvrement de la section Offer.
+> Voir [`offer-cover-animation.md`](./offer-cover-animation.md).
+
 > Implémentée en vanilla JS + CSS sticky. GSAP a été tenté puis abandonné —
 > ScrollTrigger ajoute une couche d'abstraction qui complique le debug sans
 > apporter de valeur réelle sur un effet aussi ciblé. Le vanilla est ici
