@@ -1,0 +1,27 @@
+---
+type Props = {
+  text: string;
+  variant?: "primary" | "secondary";
+  href?: string;
+};
+
+const { text, variant = "primary", href } = Astro.props;
+
+const baseStyles =
+  "inline-block px-8 py-4 font-medium rounded-3xl transition-colors text-center cursor-pointer text-sm md:text-base";
+
+const variants = {
+  primary: "bg-accent hover:bg-accent-hover text-text-on-dark",
+  secondary: "border border-accent text-accent hover:bg-accent/20",
+};
+---
+
+{
+  href ? (
+    <a href={href} class={`${baseStyles} ${variants[variant]}`}>
+      {text}
+    </a>
+  ) : (
+    <button class={`${baseStyles} ${variants[variant]}`}>{text}</button>
+  )
+}

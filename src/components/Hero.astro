@@ -1,36 +1,41 @@
 ---
-import Button from "./Button.astro";
+import Button from "./ui/Button.astro";
+import Container from "./ui/Container.astro";
 ---
 
 <section
-  class="relative overflow-hidden min-h-screen flex flex-col justify-center items-center text-center px-6 py-20"
+  class="relative overflow-hidden min-h-screen bg-bg-dark flex flex-col justify-center items-center text-center px-6 py-20"
 >
-  <div
-    class="absolute top-16 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-blue-600/10 blur-3xl rounded-full pointer-events-none"
-  >
-  </div>
-  <div
-    class="absolute top-16 w-72 h-36 md:w-96 md:h-48 bg-blue-600/20 blur-3xl rounded-full pointer-events-none"
-  >
-  </div>
-  <h1>
-    Ton offre mérite un <span
-      class="bg-linear-to-r from-blue-500 to-blue-300 bg-clip-text text-transparent"
-      >écrin</span
-    > à sa hauteur
-  </h1>
-  <div class="bg-blue-500 animate-expand-x flex justify-center mx-auto w-1/2">
-  </div>
-  <p class="text-gray-400 text-xl font-heading my-8">
-    Une landing page qui te ressemble et convainc tes visiteurs dès le premier
-    regard
-  </p>
-  <div id="hero-cta" class="flex flex-col md:flex-row gap-4 mt-10">
-    <Button variant="primary" text="Réserve ton appel découverte" />
-    <Button variant="secondary" text="Découvrir l'offre" />
-  </div>
-  <div
-    class="absolute bottom-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-blue-500/60 to-transparent"
-  >
-  </div>
+  <Container>
+    <h1>
+      Ton offre mérite un <span
+        class="bg-linear-to-r from-accent-hover to-accent bg-clip-text text-transparent"
+        >écrin</span
+      > à sa hauteur
+    </h1>
+    <div class="bg-accent animate-expand-x flex justify-center mx-auto w-1/2">
+    </div>
+    <p class="text-gray-400 md:text-xl font-heading my-8">
+      Une landing page qui te ressemble et convainc tes visiteurs dès le premier
+      regard
+    </p>
+    <div
+      id="hero-cta"
+      class="flex flex-col items-center justify-center md:flex-row gap-4 mt-10"
+    >
+      <Button variant="primary" text="Réserve ton appel découverte" />
+      <Button variant="secondary" text="Découvrir l'offre" />
+    </div>
+  </Container>
 </section>
+
+<script>
+  const heroCta = document.getElementById("hero-cta");
+  const problemsSection = document.getElementById("problems");
+
+  if (heroCta && problemsSection) {
+    heroCta.addEventListener("click", () => {
+      problemsSection.scrollIntoView({ behavior: "smooth" });
+    });
+  }
+</script>

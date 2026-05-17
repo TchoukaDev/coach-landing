@@ -1,22 +1,26 @@
 ---
-
+import Container from "./ui/Container.astro";
 ---
 
 <header
   id="navbar"
-  class="fixed top-0 left-0 right-0 z-50 transition-colors duration-300"
+  class="fixed top-0 left-0 right-0 z-50 transition-colors duration-300 border-b border-transparent"
 >
-  <div class="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
-    <span class="font-semibold text-white text-lg">Romain Wirth</span>
+  <Container>
+    <div class="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
+      <span class="font-semibold text-text-on-dark font-heading text-lg"
+        >Romain Wirth</span
+      >
 
-    <a
-      id="navbar-cta"
-      href="#contact"
-      class="opacity-0 pointer-events-none transition-opacity duration-300 px-6 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-medium rounded-xl text-sm"
-    >
-      Réserve un appel
-    </a>
-  </div>
+      <a
+        id="navbar-cta"
+        href="#contact"
+        class="opacity-0 pointer-events-none transition-opacity duration-300 px-6 py-2.5 bg-accent hover:bg-accent-hover text-text-on-dark font-medium rounded-3xl text-sm"
+      >
+        Réserve un appel
+      </a>
+    </div>
+  </Container>
 </header>
 
 <script>
@@ -31,26 +35,29 @@
         navbar?.classList.add(
           "bg-gray-950/80",
           "backdrop-blur-md",
-          "border-b",
           "border-gray-800",
         );
+        navbar?.classList.remove("border-transparent");
       } else {
         navbar?.classList.remove(
           "bg-gray-950/80",
           "backdrop-blur-md",
-          "border-b",
           "border-gray-800",
         );
+        navbar?.classList.add("border-transparent");
       }
     },
     { passive: true },
   );
 
   if (heroCta && navbarCta) {
-    new IntersectionObserver((entries) => {
-      const visible = !entries[0].isIntersecting;
-      navbarCta.classList.toggle("opacity-0", !visible);
-      navbarCta.classList.toggle("pointer-events-none", !visible);
-    }).observe(heroCta);
+    new IntersectionObserver(
+      (entries) => {
+        const visible = !entries[0].isIntersecting;
+        navbarCta.classList.toggle("opacity-0", !visible);
+        navbarCta.classList.toggle("pointer-events-none", !visible);
+      },
+      { rootMargin: "-120px 0px 0px 0px" },
+    ).observe(heroCta);
   }
 </script>

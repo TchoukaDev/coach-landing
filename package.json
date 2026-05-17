@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@fontsource-variable/dm-sans": "^5.2.8",
-    "@fontsource-variable/raleway": "^5.2.8",
+    "@fontsource-variable/playfair-display": "^5.2.8",
     "@tailwindcss/vite": "^4.3.0",
     "astro": "^6.3.3",
     "tailwindcss": "^4.3.0"

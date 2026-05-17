@@ -1,0 +1,20 @@
+---
+type Size = "sm" | "md" | "lg";
+
+type Props = {
+  size?: Size;
+  className?: string;
+};
+
+const sizes: Record<Size, string> = {
+  sm: "max-w-2xl",
+  md: "max-w-3xl",
+  lg: "max-w-7xl",
+};
+
+const { size = "lg", className = "" } = Astro.props;
+---
+
+<div class={`${sizes[size]} mx-auto ${className}`}>
+  <slot />
+</div>

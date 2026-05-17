@@ -3,15 +3,31 @@
 :root {
     /* --background: #ffffff;
    --foreground: #171717; */
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #FAFAF7;
+    --foreground: #2C2420;
 }
 
 @theme inline {
     --color-background: var(--background);
     --color-foreground: var(--foreground);
-    --font-heading: "Raleway Variable", sans-serif;
+    --font-heading: "Playfair Display Variable", serif;
     --font-body: "DM Sans Variable", sans-serif;
+
+    /* Accent terracotta */
+    --color-accent: #C4704A;
+    --color-accent-hover: #B8603A;
+    --color-accent-muted: #F5EDE8;
+
+    /* Sections */
+    --color-bg-dark: #0a0a0a;
+    --color-bg-light: #FAF7F4;
+    --color-bg-light-alt: #F0EAE4;
+
+    /* Texte */
+    --color-text-on-dark: #F5EDE8;
+    --color-text-on-dark-muted: #A89990;
+    --color-text-on-light: #2C2420;
+    --color-text-on-light-muted: #7A6860;
 }
 
 
@@ -24,11 +40,11 @@
     }
 
     main {
-        @apply grow max-w-5xl mx-auto w-full
+        @apply grow mx-auto w-full
     }
 
     h1 {
-        @apply text-4xl md:text-6xl font-bold text-white font-heading tracking-tight my-8
+        @apply text-4xl md:text-6xl font-bold font-heading tracking-tight my-8 text-accent-muted
     }
 
     h2 {
@@ -39,36 +55,11 @@
         @apply text-lg font-semibold text-white font-heading
     }
 
-    p {
-        @apply text-gray-400
-    }
 
-    p .important {
-        @apply text-gray-300
-    }
+
 }
 
-@layer components {
-    .input {
-        @apply w-[300px] sm:w-[350px] block border text-gray-300 font-semibold border-gray-800 rounded-xl px-4 pt-5 md:pt-7 pb-2 bg-gray-900/50 placeholder-transparent outline-blue-500 mx-auto
-    }
 
-    .smallText {
-        @apply text-sm text-gray-500
-    }
-
-    .hero-label {
-        @apply text-sm text-blue-400 tracking-widest uppercase mb-6
-    }
-
-    .formError {
-        @apply text-red-500 text-center my-1 text-sm
-    }
-
-    .formSuccess {
-        @apply !text-blue-500 my-1 text-center
-    }
-}
 
 /* Neutraliser le comportement d'autofill */
 input:-webkit-autofill,
