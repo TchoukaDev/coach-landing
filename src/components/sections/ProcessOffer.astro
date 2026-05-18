@@ -10,7 +10,8 @@ const steps = [
   {
     number: "02",
     title: "Cadrage & récolte",
-    description: "On définit ton offre, ton identité, ce que tu veux transmettre.",
+    description:
+      "On définit ton offre, ton identité, ce que tu veux transmettre.",
   },
   {
     number: "03",
@@ -41,14 +42,15 @@ const inclusions = [
   suivantes (témoignages, FAQ, CTA) arrivent naturellement.
 -->
 <div id="process-offer-wrapper">
-
   <section
     id="process-section"
     class="py-24 px-6 bg-bg-light-alt md:sticky md:top-0 md:z-10 md:h-screen md:overflow-hidden"
   >
     <Container size="md">
       <div class="mb-16">
-        <h2 class="text-sm uppercase tracking-widest text-accent font-medium mb-4">
+        <h2
+          class="text-sm uppercase tracking-widest text-accent font-medium mb-4"
+        >
           Mon process
         </h2>
         <p class="text-3xl md:text-4xl font-heading text-text-on-light">
@@ -83,35 +85,46 @@ const inclusions = [
     id="offer-section"
     class="bg-bg-dark flex items-center py-24 will-change-transform min-h-screen md:sticky md:top-0 md:z-20 md:h-screen"
   >
-    <Container size="md" class="px-6">
-      <h2 class="text-sm uppercase tracking-widest text-accent font-medium mb-16">
+    <Container size="md" className="px-6">
+      <h2
+        class="text-sm uppercase tracking-widest text-accent font-medium mb-16"
+      >
         L'offre
       </h2>
 
-      <div class="flex flex-col md:flex-row items-center md:items-start md:justify-between gap-16">
+      <div
+        class="flex flex-col md:flex-row items-center md:items-start md:justify-between gap-16"
+      >
         <div class="shrink-0">
-          <p class="font-heading text-text-on-dark-muted text-base mb-2">Tarif unique</p>
+          <p class="font-heading text-text-on-dark-muted text-base mb-2">
+            Tarif unique
+          </p>
           <p
             class="font-heading font-bold text-text-on-dark leading-none"
             style="font-size: clamp(5rem, 15vw, 9rem)"
           >
             500€
           </p>
-          <p class="text-accent font-medium mt-6 text-lg">Livraison en 7 jours max</p>
+          <p class="text-accent font-medium mt-6 text-lg">
+            Livraison en 7 jours max
+          </p>
         </div>
 
         <ul class="flex flex-col gap-5 flex-1 max-w-sm list-none">
-          {inclusions.map((item) => (
-            <li class="flex items-start gap-4 text-text-on-dark">
-              <span class="text-accent mt-0.5 text-lg leading-none shrink-0">✓</span>
-              <span class="text-base leading-snug">{item}</span>
-            </li>
-          ))}
+          {
+            inclusions.map((item) => (
+              <li class="flex items-start gap-4 text-text-on-dark">
+                <span class="text-accent mt-0.5 text-lg leading-none shrink-0">
+                  ✓
+                </span>
+                <span class="text-base leading-snug">{item}</span>
+              </li>
+            ))
+          }
         </ul>
       </div>
     </Container>
   </section>
-
 </div>
 
 <style>
@@ -138,11 +151,14 @@ const inclusions = [
       wrapper.style.height = "";
       track.style.transform = "";
       track.style.justifyContent = "";
-      if (offer) { offer.style.transform = ""; offer.style.boxShadow = ""; }
+      if (offer) {
+        offer.style.transform = "";
+        offer.style.boxShadow = "";
+      }
       return;
     }
 
-    const coverPause = Math.round(vh * 0.15);
+    const coverPause = Math.round(vh * 0.05);
     const coverDistance = Math.round(vh * 0.6);
     // Temps de lecture de l'offre avant que le wrapper se termine
     const readTime = Math.round(vh * 0.8);

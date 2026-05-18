@@ -1,0 +1,44 @@
+---
+import Section from "../ui/Section.astro";
+import Container from "../ui/Container.astro";
+---
+
+<Section variant="accent">
+  <Container size="md">
+    <h2
+      class="text-sm uppercase tracking-widest text-accent-muted/70 font-medium mb-12"
+    >
+      À propos
+    </h2>
+    <div class="flex flex-col md:flex-row gap-12 items-center">
+      <!-- Photo -->
+      <div class="shrink-0 mx-auto md:mx-0">
+        <div class="w-44 h-56 rounded-xl overflow-hidden bg-accent-hover/50">
+          <img
+            loading="lazy"
+            src="/photo-romain.png"
+            alt="Romain Wirth"
+            class="w-full h-full object-cover"
+          />
+        </div>
+      </div>
+
+      <!-- Texte -->
+      <div class="flex flex-col gap-4">
+        <p class="text-accent-muted leading-relaxed">
+          Ergothérapeute pendant 10 ans, j'ai pris soin et aidé des personnes à
+          avancer. Et j'ai à mon tour eu besoin d'être accompagné dans certaines
+          périodes de ma vie. C'est pourquoi je comprends ce que le travail des
+          professionnels de l'accompagnement représente vraiment.
+        </p>
+        <p class="text-accent-muted/70 leading-relaxed">
+          Aujourd'hui je suis développeur web, avec des compétences différentes
+          mais des valeurs qui n'ont pas changé. Je souhaite les mettre au
+          service de ces professionnels et les aider à avoir une présence en
+          ligne à la hauteur de ce qu'ils font.
+        </p>
+        <p class="text-accent-muted font-medium mt-2 text-end">Romain Wirth</p>
+      </div>
+    </div>
+  </Container>
+</Section>
