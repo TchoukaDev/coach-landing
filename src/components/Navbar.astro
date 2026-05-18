@@ -15,7 +15,7 @@ import Container from "./ui/Container.astro";
       <a
         id="navbar-cta"
         href="#contact"
-        class="opacity-0 pointer-events-none transition-opacity duration-300 px-6 py-2.5 bg-accent hover:bg-accent-hover text-text-on-dark font-medium rounded-3xl text-sm"
+        class="opacity-0 pointer-events-none transition-opacity duration-300 px-6 py-2.5 bg-accent hover:bg-accent-hover text-text-on-dark font-medium rounded-2xl text-sm"
       >
         Réserve un appel
       </a>
@@ -35,14 +35,14 @@ import Container from "./ui/Container.astro";
         navbar?.classList.add(
           "bg-gray-950/80",
           "backdrop-blur-md",
-          "border-gray-800",
+          "border-accent/50",
         );
         navbar?.classList.remove("border-transparent");
       } else {
         navbar?.classList.remove(
           "bg-gray-950/80",
           "backdrop-blur-md",
-          "border-gray-800",
+          "border-accent/50",
         );
         navbar?.classList.add("border-transparent");
       }

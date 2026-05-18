@@ -1,0 +1,141 @@
+---
+import Container from "../ui/Container.astro";
+import Section from "../ui/Section.astro";
+
+const items = [
+  {
+    question: "Pourquoi 500€ ?",
+    answer:
+      "500€ pour un site sur-mesure, c'est volontairement accessible. L'idée, c'est de te donner un premier support en ligne professionnel sans avoir à investir dans un site complet. Tu bénéficies d'un design soigné, d'un copywriting travaillé avec toi et d'un déploiement clé en main, pour un budget qui correspond à où tu en es.",
+  },
+  {
+    question: "Pourrai-je modifier moi-même ma page ?",
+    answer:
+      "Oui. Ta landing page est connectée à un outil simple qui te permet de modifier tes textes et tes images toi-même, sans toucher au code. La structure et le design ne sont en revanche pas modifiables directement. Pour le contenu, tu es autonome dès la livraison. ",
+  },
+  {
+    question: "Est-ce que ma page apparaîtra sur Google ?",
+    answer:
+      "Ta page sera en ligne et accessible depuis Google, mais elle n'est pas optimisée pour le référencement naturel. Une landing page d'une seule page a peu de chances d'apparaître en tête des résultats sur des mots-clés concurrentiels. Son vrai rôle, c'est d'être l'endroit où tu envoies tes prospects (depuis LinkedIn, ton bouche-à-oreille, ou tes réseaux) et de les convaincre une fois qu'ils sont là.",
+  },
+  {
+    question: "Que se passe-t-il si ma page ne convertit pas ?",
+    answer:
+      "Je conçois ta page pour convaincre (structure, textes, design). Tout est pensé pour que ton visiteur passe à l'action. Mais une page ne convertit que si elle reçoit des visites. Si tu envoies des prospects dessus et que ça ne décroche pas, on regarde ensemble ce qui peut être ajusté pendant le mois de support. Si personne n'arrive, le travail est ailleurs (LinkedIn, bouche-à-oreille, réseaux) et là je peux te conseiller, mais l'action dépend de toi.",
+  },
+  {
+    question: "Comment est hébergé ma page ?",
+    answer:
+      "Ta page est déployée sur Vercel, une plateforme professionnelle utilisée par des milliers de développeurs dans le monde. C'est gratuit pour ton usage, fiable, et rapide. Je te guide pour la création de compte et l'achat du nom de domaine si tu en as besoin.",
+  },
+  {
+    question: "Et si j'ai plusieurs offres ou besoin de plusieurs pages ?",
+    answer:
+      "La landing page peut présenter jusqu'à 3 offres distinctes. Au-delà, l'expérience visiteur se dilue et il devient difficile de convaincre. Si tu as besoin d'un site complet, c'est possible. On en discute lors de l'appel découverte et je te fais une proposition adaptée.",
+  },
+];
+---
+
+<Section variant="light">
+  <Container size="md">
+    <h2 class="text-sm uppercase tracking-widest text-accent font-medium mb-16">
+      Questions fréquentes
+    </h2>
+
+    <dl class="flex flex-col divide-y divide-text-on-light/10">
+      {
+        items.map((item, i) => (
+          <div class="py-6">
+            <dt>
+              <button
+                class="group flex w-full items-center justify-between gap-8 text-left cursor-pointer"
+                aria-expanded="false"
+                aria-controls={`faq-${i}`}
+              >
+                <span class="font-heading text-lg font-semibold text-text-on-light transition-colors duration-300 group-aria-expanded:text-accent">
+                  {item.question}
+                </span>
+                <span
+                  aria-hidden="true"
+                  class="shrink-0 text-accent transition-transform duration-300 group-aria-expanded:rotate-45"
+                >
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path
+                      d="M10 4v12M4 10h12"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                    />
+                  </svg>
+                </span>
+              </button>
+            </dt>
+            <div id={`faq-${i}`} class="faq-body" role="region">
+              <div>
+                <dd class="pt-4 pb-2 text-text-on-light-muted leading-relaxed max-w-2xl">
+                  {item.answer}
+                </dd>
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </dl>
+  </Container>
+</Section>
+
+<style>
+  .faq-body {
+    display: grid;
+    grid-template-rows: 0fr;
+  }
+  .faq-body > * {
+    overflow: hidden;
+  }
+</style>
+
+<script>
+  function openItem(btn: HTMLButtonElement, body: HTMLElement) {
+    btn.setAttribute("aria-expanded", "true");
+    body.style.gridTemplateRows = "0fr";
+    body.getBoundingClientRect();
+    body.style.transition = "grid-template-rows 0.35s ease-out";
+    body.style.gridTemplateRows = "1fr";
+    body.addEventListener(
+      "transitionend",
+      () => {
+        body.style.transition = "";
+      },
+      { once: true },
+    );
+  }
+
+  function closeItem(btn: HTMLButtonElement, body: HTMLElement) {
+    btn.setAttribute("aria-expanded", "false");
+    body.getBoundingClientRect();
+    body.style.transition = "grid-template-rows 0.28s ease-in";
+    body.style.gridTemplateRows = "0fr";
+    body.addEventListener(
+      "transitionend",
+      () => {
+        body.style.transition = "";
+        body.style.gridTemplateRows = "";
+      },
+      { once: true },
+    );
+  }
+
+  document
+    .querySelectorAll<HTMLButtonElement>("[aria-controls^='faq-']")
+    .forEach((btn) => {
+      const bodyId = btn.getAttribute("aria-controls")!;
+      const body = document.getElementById(bodyId) as HTMLElement | null;
+      if (!body) return;
+
+      btn.addEventListener("click", () => {
+        btn.getAttribute("aria-expanded") === "true"
+          ? closeItem(btn, body)
+          : openItem(btn, body);
+      });
+    });
+</script>

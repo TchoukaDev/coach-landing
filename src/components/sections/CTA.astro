@@ -1,0 +1,30 @@
+---
+import Container from "../ui/Container.astro";
+import Button from "../ui/Button.astro";
+---
+
+<section class="bg-bg-dark py-32 px-6 text-center">
+  <Container size="sm">
+    <p class="text-sm uppercase tracking-widest text-accent font-medium mb-8">
+      Prêt à te lancer ?
+    </p>
+
+    <h2
+      class="font-heading font-bold text-text-on-dark leading-tight mb-8"
+      style="font-size: clamp(2.5rem, 6vw, 4.5rem)"
+    >
+      Ta page en ligne<br />dans 7 jours.
+    </h2>
+
+    <p class="text-text-on-dark-muted text-lg leading-relaxed mb-12 max-w-md mx-auto">
+      Un appel de 30 minutes pour vérifier que le projet fait sens.
+      Sans engagement.
+    </p>
+
+    <Button href="#" variant="primary" text="Réserve ton appel découverte" />
+
+    <p class="text-text-on-dark-muted text-sm mt-8">
+      500€ · Livraison en 7 jours · 1 mois de support inclus
+    </p>
+  </Container>
+</section>
