@@ -1,0 +1,40 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<Layout>
+  <main class="bg-bg-light min-h-screen px-6 py-24">
+    <div class="max-w-2xl mx-auto">
+      <a
+        href="/"
+        class="text-sm text-text-on-light-muted hover:text-text-on-light transition-colors duration-200 mb-12 inline-block"
+      >
+        ← Retour
+      </a>
+
+      <h1 class="font-heading text-3xl font-bold text-text-on-light mb-12">
+        Politique de confidentialité
+      </h1>
+
+      <div class="prose prose-neutral text-text-on-light-muted leading-relaxed space-y-8">
+        <section>
+          <h2 class="font-heading text-xl font-semibold text-text-on-light mb-3">Données collectées</h2>
+          <p>Ce site ne collecte aucune donnée personnelle de manière automatique. Aucun cookie de tracking, aucune analytics.</p>
+          <p>Si vous me contactez par email, vos coordonnées sont utilisées uniquement pour répondre à votre demande.</p>
+        </section>
+
+        <section>
+          <h2 class="font-heading text-xl font-semibold text-text-on-light mb-3">Prise de rendez-vous</h2>
+          <p>Le bouton de réservation d'appel utilise un outil tiers (Calendly). En l'utilisant, vous êtes soumis à leur propre politique de confidentialité.</p>
+        </section>
+
+        <section>
+          <h2 class="font-heading text-xl font-semibold text-text-on-light mb-3">Contact</h2>
+          <p>Pour toute question relative à vos données : <a href="mailto:contact@romainwirth.fr" class="underline">contact@romainwirth.fr</a></p>
+        </section>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Layout>
