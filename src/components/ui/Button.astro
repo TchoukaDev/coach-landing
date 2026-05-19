@@ -3,9 +3,10 @@ type Props = {
   text: string;
   variant?: "primary" | "secondary";
   href?: string;
+  target?: string;
 };
 
-const { text, variant = "primary", href } = Astro.props;
+const { text, variant = "primary", href, target } = Astro.props;
 
 const baseStyles =
   "inline-block px-8 py-4 font-medium rounded-2xl transition-colors text-center cursor-pointer text-sm md:text-base";
@@ -18,7 +19,7 @@ const variants = {
 
 {
   href ? (
-    <a href={href} class={`${baseStyles} ${variants[variant]}`}>
+    <a href={href} target={target} rel={target === "_blank" ? "noopener noreferrer" : undefined} class={`${baseStyles} ${variants[variant]}`}>
       {text}
     </a>
   ) : (
