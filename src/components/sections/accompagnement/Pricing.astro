@@ -1,0 +1,67 @@
+---
+import Section from "../../ui/Section.astro";
+import Container from "../../ui/Container.astro";
+import Button from "../../ui/Button.astro";
+
+const plans = [
+  {
+    name: "Formule 1",
+    description: "E-learning autonome",
+    price: "500€ TTC",
+    payment: "1 ou 2 fois",
+    highlighted: false,
+  },
+  {
+    name: "Formule 2",
+    description: "E-learning + trainings collectifs",
+    price: "1 500€ TTC",
+    payment: "1, 2 ou 3 fois sans frais",
+    highlighted: true,
+  },
+  {
+    name: "Formule 3",
+    description: "E-learning + trainings collectifs + RDVs individuels",
+    price: "2 500€ TTC",
+    payment: "1, 2, 3 ou 5 fois sans frais",
+    highlighted: false,
+  },
+];
+---
+
+<Section variant="light">
+  <Container size="lg">
+    <div class="flex flex-col gap-12">
+      <div class="flex flex-col gap-4 text-center">
+        <span class="text-sm font-medium tracking-widest uppercase text-accent">
+          Vos options d'accompagnement
+        </span>
+        <h2 class="font-heading font-bold text-3xl md:text-4xl text-text-on-light">
+          Choisissez votre formule
+        </h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {plans.map((plan) => (
+          <div class={`flex flex-col gap-6 rounded-2xl p-8 border ${plan.highlighted ? "border-accent bg-accent/5 ring-1 ring-accent" : "border-text-on-light/10 bg-white"}`}>
+            {plan.highlighted && (
+              <span class="text-xs font-semibold uppercase tracking-widest text-accent">Recommandée</span>
+            )}
+            <div class="flex flex-col gap-2">
+              <h3 class="font-heading font-semibold text-xl text-text-on-light">{plan.name}</h3>
+              <p class="text-text-on-light-muted text-sm">{plan.description}</p>
+            </div>
+            <div>
+              <span class="text-3xl font-bold font-heading text-text-on-light">{plan.price}</span>
+              <p class="text-text-on-light-muted text-sm mt-1">{plan.payment}</p>
+            </div>
+            <Button
+              text="Réserver un appel"
+              variant={plan.highlighted ? "primary" : "secondary"}
+              href="https://calendly.com/contact-romainwirth/page-pour-coachs-et-therapeutique"
+              target="_blank"
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  </Container>
+</Section>

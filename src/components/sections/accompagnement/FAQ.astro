@@ -1,0 +1,100 @@
+---
+import Section from "../../ui/Section.astro";
+import Container from "../../ui/Container.astro";
+
+const items = [
+  {
+    q: "À qui s'adresse cet accompagnement ?",
+    a: "À compléter — décris ta cible idéale (indépendants, coachs, thérapeutes, etc.).",
+  },
+  {
+    q: "Quelle est la durée du programme ?",
+    a: "À compléter — durée, rythme, fréquence des sessions.",
+  },
+  {
+    q: "Est-ce que je garde accès aux contenus après la fin ?",
+    a: "À compléter — conditions d'accès, durée, plateforme.",
+  },
+  {
+    q: "Que se passe-t-il si ça ne me convient pas ?",
+    a: "À compléter — conditions de la garantie 14 jours.",
+  },
+  {
+    q: "Comment se déroule un appel découverte ?",
+    a: "À compléter — durée, objectif, ce qu'on y aborde.",
+  },
+  {
+    q: "Quels résultats puis-je espérer ?",
+    a: "À compléter — résultats concrets, exemples de clients.",
+  },
+];
+---
+
+<Section variant="light">
+  <Container size="md">
+    <div class="flex flex-col gap-10">
+      <div class="flex flex-col gap-4">
+        <span class="text-sm font-medium tracking-widest uppercase text-accent">
+          Questions fréquentes
+        </span>
+        <h2 class="font-heading font-bold text-3xl md:text-4xl text-text-on-light">
+          FAQ
+        </h2>
+      </div>
+      <ul class="flex flex-col divide-y divide-text-on-light/10">
+        {items.map((item, i) => (
+          <li>
+            <button
+              class="w-full flex items-center justify-between gap-4 py-6 text-left text-text-on-light font-semibold text-lg hover:text-accent transition-colors duration-200"
+              aria-expanded="false"
+              aria-controls={`faq-answer-${i}`}
+            >
+              {item.q}
+              <span class="text-accent text-2xl leading-none shrink-0 transition-transform duration-300" aria-hidden="true">+</span>
+            </button>
+            <div
+              id={`faq-answer-${i}`}
+              class="grid transition-[grid-template-rows] duration-350 ease-in-out"
+              style="grid-template-rows: 0fr;"
+            >
+              <div class="overflow-hidden">
+                <p class="text-text-on-light-muted pb-6 leading-relaxed">{item.a}</p>
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </Container>
+</Section>
+
+<script>
+  function openItem(btn: HTMLButtonElement, answer: HTMLElement, icon: HTMLElement) {
+    btn.setAttribute("aria-expanded", "true");
+    answer.style.gridTemplateRows = "1fr";
+    icon.style.transform = "rotate(45deg)";
+  }
+
+  function closeItem(btn: HTMLButtonElement, answer: HTMLElement, icon: HTMLElement) {
+    btn.setAttribute("aria-expanded", "false");
+    answer.style.gridTemplateRows = "0fr";
+    icon.style.transform = "rotate(0deg)";
+  }
+
+  document.querySelectorAll<HTMLButtonElement>("[aria-controls]").forEach((btn) => {
+    const answerId = btn.getAttribute("aria-controls");
+    if (!answerId) return;
+    const answer = document.getElementById(answerId) as HTMLElement;
+    const icon = btn.querySelector<HTMLElement>("[aria-hidden]");
+    if (!answer || !icon) return;
+
+    btn.addEventListener("click", () => {
+      const isOpen = btn.getAttribute("aria-expanded") === "true";
+      if (isOpen) {
+        closeItem(btn, answer, icon);
+      } else {
+        openItem(btn, answer, icon);
+      }
+    });
+  });
+</script>

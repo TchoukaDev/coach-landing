@@ -1,0 +1,43 @@
+---
+import Section from "../../ui/Section.astro";
+import Container from "../../ui/Container.astro";
+import Button from "../../ui/Button.astro";
+
+const inclusions = [
+  "Accès complet à la formation",
+  "Tous les supports + templates prêts à l'emploi",
+  "Coaching / suivi selon formule",
+  "Tous les bonus + livrables concrets",
+  "Méthode, structure, stratégie, mise en action",
+];
+---
+
+<Section variant="dark">
+  <Container size="sm">
+    <div class="flex flex-col items-center text-center gap-8">
+      <span class="text-sm font-medium tracking-widest uppercase text-accent">
+        Prêt à passer à l'action ?
+      </span>
+      <h2 class="font-heading font-bold text-3xl md:text-4xl text-text-on-dark">
+        Tout ce que vous recevez — à compléter
+      </h2>
+      <ul class="flex flex-col gap-3 text-left w-full max-w-sm">
+        {inclusions.map((item) => (
+          <li class="flex items-start gap-3 text-text-on-dark-muted">
+            <span class="text-accent mt-0.5 shrink-0">✓</span>
+            {item}
+          </li>
+        ))}
+      </ul>
+      <Button
+        text="Réserve ton appel découverte"
+        variant="primary"
+        href="https://calendly.com/contact-romainwirth/page-pour-coachs-et-therapeutique"
+        target="_blank"
+      />
+      <p class="text-text-on-dark-muted text-sm">
+        Appel gratuit, sans engagement · 30 min
+      </p>
+    </div>
+  </Container>
+</Section>

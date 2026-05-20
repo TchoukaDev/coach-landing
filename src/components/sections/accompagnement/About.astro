@@ -1,0 +1,33 @@
+---
+import Section from "../../ui/Section.astro";
+import Container from "../../ui/Container.astro";
+---
+
+<Section variant="light">
+  <Container size="md">
+    <div class="flex flex-col md:flex-row gap-12 items-start">
+      <img
+        src="/photo-romain.png"
+        alt="Romain Wirth"
+        class="w-44 h-56 object-cover rounded-xl shrink-0"
+      />
+      <div class="flex flex-col gap-6">
+        <span class="text-sm font-medium tracking-widest uppercase text-accent">
+          Qui suis-je
+        </span>
+        <h2 class="font-heading font-bold text-3xl md:text-4xl text-text-on-light">
+          Romain Wirth — à compléter
+        </h2>
+        <p class="text-text-on-light-muted text-lg leading-relaxed">
+          Mon point de départ / les galères vécues — à compléter.
+        </p>
+        <p class="text-text-on-light-muted text-lg leading-relaxed">
+          Mon expérience / mon expertise aujourd'hui — à compléter.
+        </p>
+        <p class="text-text-on-light-muted text-lg leading-relaxed">
+          Pourquoi j'aide aujourd'hui les indépendants comme vous — à compléter.
+        </p>
+      </div>
+    </div>
+  </Container>
+</Section>

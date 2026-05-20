@@ -1,0 +1,38 @@
+---
+import Section from "../../ui/Section.astro";
+import Container from "../../ui/Container.astro";
+import Button from "../../ui/Button.astro";
+---
+
+<Section variant="dark" className="min-h-svh flex items-center justify-center">
+  <Container size="md">
+    <div class="flex flex-col items-center text-center gap-6">
+      <span
+        class="text-sm font-medium tracking-widest uppercase text-accent border border-accent/30 rounded-full px-4 py-1.5"
+      >
+        Accompagnement global
+      </span>
+      <h1 class="text-text-on-dark">
+        Titre accrocheur de l'offre<br />
+        <span
+          class="bg-gradient-to-r from-accent to-amber-400 bg-clip-text text-transparent"
+        >
+          à compléter
+        </span>
+      </h1>
+      <span class="animate-expand-x bg-accent"></span>
+      <p class="text-text-on-dark-muted text-lg max-w-xl">
+        Sous-titre de l'offre d'accompagnement — à compléter.
+      </p>
+      <div id="hero-cta" class="flex flex-col sm:flex-row gap-4 mt-4">
+        <Button
+          text="Réserve un appel"
+          variant="primary"
+          href="https://calendly.com/contact-romainwirth/page-pour-coachs-et-therapeutique"
+          target="_blank"
+        />
+        <Button text="Découvrir l'offre" variant="secondary" href="#context" />
+      </div>
+    </div>
+  </Container>
+</Section>

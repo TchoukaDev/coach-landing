@@ -1,0 +1,35 @@
+---
+import Section from "../../ui/Section.astro";
+import Container from "../../ui/Container.astro";
+
+const pains = [
+  "Vous en avez marre de courir après les clients",
+  "Vous passez du temps à poster sans retour",
+  "Vous ne savez plus à qui vous adresser",
+  "Vous doutez de vos prix, votre offre, vos choix",
+  "Vous êtes bloqué(e) car vous êtes seul(e)",
+];
+---
+
+<Section variant="alt">
+  <Container size="md">
+    <div class="flex flex-col gap-8">
+      <span
+        class="text-sm font-medium tracking-widest uppercase text-accent"
+      >
+        Est-ce que ça vous parle ?
+      </span>
+      <h2 class="font-heading font-bold text-3xl md:text-4xl text-text-on-light">
+        Les douleurs de ta cible — à compléter
+      </h2>
+      <ul class="flex flex-col gap-4">
+        {pains.map((pain) => (
+          <li class="flex items-start gap-3 text-text-on-light-muted text-lg">
+            <span class="text-accent mt-1 shrink-0">✗</span>
+            {pain}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </Container>
+</Section>

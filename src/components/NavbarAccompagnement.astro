@@ -1,0 +1,65 @@
+---
+import Container from "./ui/Container.astro";
+---
+
+<header
+  id="navbar"
+  class="fixed top-0 left-0 right-0 z-50 transition-colors duration-300 border-b border-transparent"
+>
+  <Container>
+    <div class="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
+      <span class="font-semibold text-text-on-dark font-heading text-lg"
+        >Romain Wirth</span
+      >
+
+      <a
+        id="navbar-cta"
+        href="https://calendly.com/contact-romainwirth/page-pour-coachs-et-therapeutique"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="opacity-0 pointer-events-none transition-opacity duration-300 px-6 py-2.5 bg-accent hover:bg-accent-hover text-text-on-dark font-medium rounded-2xl text-sm"
+      >
+        Réserve un appel
+      </a>
+    </div>
+  </Container>
+</header>
+
+<script>
+  const navbar = document.getElementById("navbar");
+  const navbarCta = document.getElementById("navbar-cta");
+  const heroCta = document.getElementById("hero-cta");
+
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (window.scrollY > 10) {
+        navbar?.classList.add(
+          "bg-gray-950/80",
+          "backdrop-blur-md",
+          "border-accent/50",
+        );
+        navbar?.classList.remove("border-transparent");
+      } else {
+        navbar?.classList.remove(
+          "bg-gray-950/80",
+          "backdrop-blur-md",
+          "border-accent/50",
+        );
+        navbar?.classList.add("border-transparent");
+      }
+    },
+    { passive: true },
+  );
+
+  if (heroCta && navbarCta) {
+    new IntersectionObserver(
+      (entries) => {
+        const visible = !entries[0].isIntersecting;
+        navbarCta.classList.toggle("opacity-0", !visible);
+        navbarCta.classList.toggle("pointer-events-none", !visible);
+      },
+      { rootMargin: "-120px 0px 0px 0px" },
+    ).observe(heroCta);
+  }
+</script>

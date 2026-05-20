@@ -1,0 +1,44 @@
+---
+import Section from "../../ui/Section.astro";
+import Container from "../../ui/Container.astro";
+
+const testimonials = [
+  {
+    quote: "Témoignage client à compléter — résultat concret obtenu grâce à l'accompagnement.",
+    name: "Prénom Nom",
+    role: "Titre / activité",
+  },
+  {
+    quote: "Deuxième témoignage à compléter — transformation vécue, impact sur l'activité.",
+    name: "Prénom Nom",
+    role: "Titre / activité",
+  },
+];
+---
+
+<Section variant="dark">
+  <Container size="md">
+    <div class="flex flex-col gap-12">
+      <div class="flex flex-col gap-4">
+        <span class="text-sm font-medium tracking-widest uppercase text-accent">
+          Ils sont passés par là, et vous ?
+        </span>
+        <h2 class="font-heading font-bold text-3xl md:text-4xl text-text-on-dark">
+          Témoignages — à compléter
+        </h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {testimonials.map((t) => (
+          <div class="border border-white/10 rounded-2xl p-8 bg-bg-dark flex flex-col gap-6">
+            <span class="text-5xl font-heading text-accent/30 leading-none">"</span>
+            <p class="text-text-on-dark-muted text-lg leading-relaxed italic">{t.quote}</p>
+            <div>
+              <p class="font-semibold text-text-on-dark">{t.name}</p>
+              <p class="text-text-on-dark-muted text-sm">{t.role}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </Container>
+</Section>
