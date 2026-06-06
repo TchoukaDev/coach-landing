@@ -2,20 +2,27 @@
 import "../styles/global.css";
 import "@fontsource-variable/playfair-display";
 import "@fontsource-variable/dm-sans";
+
+type Props = {
+  title?: string;
+  description?: string;
+};
+
+const {
+  title = "Romain Wirth",
+  description = "",
+} = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
-    <title>Page web pour Coachs et Thérapeutes || Romain Wirth</title>
-    <meta
-      name="description"
-      content="Tu es coach de vie ou en développement personnel et tu n'as pas de site qui met en avant ton expertise ? Je crée ta page web en 7 jours, livrée clé en main."
-    />
+    <title>{title}</title>
+    <meta name="description" content={description} />
   </head>
   <body>
     <slot />

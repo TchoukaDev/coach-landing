@@ -1,26 +1,38 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Hero from "../components/sections/landing-site/Hero.astro";
-import Navbar from "../components/Navbar.astro";
-import Problems from "../components/sections/landing-site/Problems.astro";
-import Solving from "../components/sections/landing-site/Solving.astro";
-import ProcessOffer from "../components/sections/landing-site/ProcessOffer.astro";
-import About from "../components/sections/landing-site/About.astro";
-import Testimonials from "../components/sections/landing-site/Testimonials.astro";
-import FAQ from "../components/sections/landing-site/FAQ.astro";
-import CTA from "../components/sections/landing-site/CTA.astro";
+import NavbarAccompagnement from "../components/NavbarAccompagnement.astro";
 import Footer from "../components/Footer.astro";
+
+import Hero from "../components/sections/accompagnement/Hero.astro";
+import Context from "../components/sections/accompagnement/Context.astro";
+import PainPoints from "../components/sections/accompagnement/PainPoints.astro";
+import Promise from "../components/sections/accompagnement/Promise.astro";
+import About from "../components/sections/accompagnement/About.astro";
+import Audit from "../components/sections/accompagnement/Audit.astro";
+import Method from "../components/sections/accompagnement/Method.astro";
+import Benefits from "../components/sections/accompagnement/Benefits.astro";
+import Testimonials from "../components/sections/accompagnement/Testimonials.astro";
+import Guarantee from "../components/sections/accompagnement/Guarantee.astro";
+import FAQ from "../components/sections/accompagnement/FAQ.astro";
+import CTA from "../components/sections/accompagnement/CTA.astro";
 ---
 
-<Layout>
+<Layout
+  title="Accompagnement digital pour coachs et thérapeutes | Romain Wirth"
+  description="J'aide les coachs et thérapeutes à attirer plus de clients grâce à une présence digitale claire, professionnelle et alignée avec leurs valeurs. Audit stratégique offert — 45 min, sans engagement."
+>
   <main>
-    <Navbar />
+    <NavbarAccompagnement />
     <Hero />
-    <Problems />
-    <Solving />
-    <ProcessOffer />
+    <PainPoints />
+    <Context />
+    <Promise />
     <About />
     <Testimonials />
+    <Audit />
+    <Method />
+    <Benefits />
+    <Guarantee />
     <FAQ />
     <CTA />
     <Footer />
