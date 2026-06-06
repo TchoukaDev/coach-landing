@@ -1,25 +1,37 @@
 ---
 import Section from "../../ui/Section.astro";
 import Container from "../../ui/Container.astro";
+
+const consequences = [
+  "Peu de différenciation face aux autres professionnels",
+  "Difficulté à attirer de nouveaux clients",
+  "Revenus irréguliers",
+  "Perte de temps",
+  "Sentiment de stagnation",
+  "Remise en question permanente",
+  "Impression d'être invisible malgré ses compétences",
+];
 ---
 
-<Section variant="light" id="context">
+<Section variant="alt">
   <Container size="md">
-    <div class="flex flex-col gap-8">
-      <span
-        class="text-sm font-medium tracking-widest uppercase text-accent"
-      >
-        Pourquoi cette offre existe
-      </span>
-      <h2 class="font-heading font-bold text-3xl md:text-4xl text-text-on-light">
-        Le contexte — à compléter
-      </h2>
-      <p class="text-text-on-light-muted text-lg leading-relaxed">
-        Beaucoup d'indépendants galèrent à [ex : trouver des clients régulièrement / structurer leur activité]. Les conseils qu'on trouve sont souvent contradictoires ou incomplets. Il manque un cadre simple, pragmatique, qui produit des résultats concrets.
-      </p>
-      <p class="text-text-on-light-muted text-lg leading-relaxed">
-        Des chiffres clés qui mettent en avant le problème sur ton secteur d'activité — à compléter.
-      </p>
-    </div>
+    <h2 class="text-sm uppercase tracking-widest text-accent font-medium mb-10">
+      Les conséquences
+    </h2>
+    <p class="text-2xl md:text-3xl font-heading leading-relaxed text-text-on-light-muted mb-12">
+      Ce que cette situation<br />
+      <strong class="text-text-on-light font-semibold">te coûte réellement</strong>
+    </p>
+    <p class="text-lg text-text-on-light-muted mb-8">
+      Au-delà du manque de visibilité, cela génère :
+    </p>
+    <ul class="flex flex-col gap-4">
+      {consequences.map((item) => (
+        <li class="flex items-start gap-4 text-lg text-text-on-light-muted">
+          <span class="text-accent font-bold mt-0.5 shrink-0">→</span>
+          {item}
+        </li>
+      ))}
+    </ul>
   </Container>
 </Section>

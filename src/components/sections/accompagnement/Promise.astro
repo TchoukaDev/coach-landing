@@ -1,38 +1,22 @@
 ---
 import Section from "../../ui/Section.astro";
 import Container from "../../ui/Container.astro";
-
-const outcomes = [
-  { type: "Résultat concret", example: "Ex. \"Générer des RDV chaque semaine\"" },
-  { type: "Résultat émotionnel", example: "Ex. \"Retrouver confiance et clarté\"" },
-  { type: "Résultat stratégique", example: "Ex. \"Construire un système duplicable et autonome\"" },
-];
 ---
 
 <Section variant="dark">
-  <Container size="md">
-    <div class="flex flex-col gap-8">
-      <span
-        class="text-sm font-medium tracking-widest uppercase text-accent"
-      >
-        Ce que cette offre va vous permettre
+  <Container size="sm">
+    <div class="flex flex-col items-center text-center gap-4">
+      <span class="text-sm font-medium tracking-widest uppercase text-accent mb-6">
+        Moralité
       </span>
-      <h2 class="font-heading font-bold text-3xl md:text-4xl text-text-on-dark">
-        La promesse — à compléter
-      </h2>
-      <p class="text-text-on-dark-muted text-lg">
-        Grâce à cette méthode, vous allez pouvoir :
+      <p class="text-2xl md:text-3xl font-heading leading-relaxed text-text-on-dark-muted">
+        Tu es excellent dans ton métier.
       </p>
-      <ul class="flex flex-col gap-6">
-        {outcomes.map((o) => (
-          <li class="flex flex-col gap-1">
-            <span class="text-accent font-semibold">{o.type}</span>
-            <span class="text-text-on-dark-muted">{o.example}</span>
-          </li>
-        ))}
-      </ul>
-      <p class="text-text-on-dark-muted text-sm italic">
-        Même si vous partez de zéro, sans compétences techniques ou réseau.
+      <p class="text-2xl md:text-3xl font-heading leading-relaxed text-text-on-dark-muted">
+        Le problème n'est pas ton expertise.
+      </p>
+      <p class="text-2xl md:text-3xl font-heading font-bold leading-relaxed text-text-on-dark mt-4">
+        Le problème est que les bonnes personnes ne te trouvent pas.
       </p>
     </div>
   </Container>

@@ -5,27 +5,38 @@ import Container from "../../ui/Container.astro";
 
 <Section variant="light">
   <Container size="md">
-    <div class="flex flex-col md:flex-row gap-12 items-start">
-      <img
-        src="/photo-romain.png"
-        alt="Romain Wirth"
-        class="w-44 h-56 object-cover rounded-xl shrink-0"
-      />
-      <div class="flex flex-col gap-6">
-        <span class="text-sm font-medium tracking-widest uppercase text-accent">
-          Qui suis-je
-        </span>
-        <h2 class="font-heading font-bold text-3xl md:text-4xl text-text-on-light">
-          Romain Wirth — à compléter
-        </h2>
+    <h2 class="text-sm uppercase tracking-widest text-accent font-medium mb-12">
+      Pourquoi je suis la bonne personne pour t'accompagner
+    </h2>
+    <div class="flex flex-col md:flex-row gap-12 items-center">
+      <div class="shrink-0 mx-auto md:mx-0">
+        <div class="w-44 h-56 rounded-xl overflow-hidden bg-bg-light-alt">
+          <img
+            loading="lazy"
+            src="/photo-romain.png"
+            alt="Romain Wirth"
+            class="w-full h-full object-cover"
+          />
+        </div>
+      </div>
+      <div class="flex flex-col gap-5">
         <p class="text-text-on-light-muted text-lg leading-relaxed">
-          Mon point de départ / les galères vécues — à compléter.
+          Pendant plus de 12 ans, j'ai accompagné des personnes en tant
+          qu'ergothérapeute puis cadre de santé. Aider les autres à avancer a
+          toujours été au cœur de mon métier.
         </p>
         <p class="text-text-on-light-muted text-lg leading-relaxed">
-          Mon expérience / mon expertise aujourd'hui — à compléter.
+          Aujourd'hui, en tant que développeur web, j'ai choisi de mettre cette
+          expertise humaine au service des coachs et thérapeutes.
         </p>
         <p class="text-text-on-light-muted text-lg leading-relaxed">
-          Pourquoi j'aide aujourd'hui les indépendants comme vous — à compléter.
+          Je ne suis pas simplement développeur. Je comprends les réalités de
+          ton métier, les difficultés que tu rencontres et les enjeux liés à la
+          relation d'aide.
+        </p>
+        <p class="text-text-on-light font-medium text-lg leading-relaxed">
+          C'est ce qui me permet de créer des outils réellement adaptés à ton
+          activité.
         </p>
       </div>
     </div>

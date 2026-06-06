@@ -4,28 +4,32 @@ import Container from "../../ui/Container.astro";
 
 const items = [
   {
-    q: "À qui s'adresse cet accompagnement ?",
-    a: "À compléter — décris ta cible idéale (indépendants, coachs, thérapeutes, etc.).",
+    q: "J'ai déjà essayé avec une agence ou un freelance, ça n'a rien donné.",
+    a: "La différence est dans l'approche. Je ne livre pas juste un site — je construis avec toi un système complet et une stratégie globale adaptés à ton activité, et je m'assure que tu sais les mettre en œuvre. Pas de livraison \"clé en main\" qui finit au fond d'un tiroir.",
   },
   {
-    q: "Quelle est la durée du programme ?",
-    a: "À compléter — durée, rythme, fréquence des sessions.",
+    q: "Je ne suis pas à l'aise avec la technique.",
+    a: "C'est exactement pour ça que la formation et l'autonomie font partie du process. On choisit ensemble des outils adaptés à ton niveau, et je t'accompagne jusqu'à ce que tu les maîtrises.",
   },
   {
-    q: "Est-ce que je garde accès aux contenus après la fin ?",
-    a: "À compléter — conditions d'accès, durée, plateforme.",
+    q: "Je peux me débrouiller seul(e) avec YouTube et ChatGPT.",
+    a: 'Peut-être. Mais entre "pouvoir" et "le faire vraiment" il y a souvent des mois de procrastination et d\'essais infructueux. L\'accompagnement te donne une structure et un regard extérieur. Ce qui prendrait 1 an seul, on le fait en 6 à 10 semaines.',
   },
   {
-    q: "Que se passe-t-il si ça ne me convient pas ?",
-    a: "À compléter — conditions de la garantie 14 jours.",
+    q: "Est-ce que ça va fonctionner pour mon activité spécifique ?",
+    a: "C'est exactement la question qu'on pose lors de l'audit. Avant tout engagement, on analyse ensemble ton activité, ton positionnement et tes besoins. Si l'accompagnement n'est pas adapté, je te le dirai clairement.",
   },
   {
-    q: "Comment se déroule un appel découverte ?",
-    a: "À compléter — durée, objectif, ce qu'on y aborde.",
+    q: "Je ne sais pas par où commencer.",
+    a: "C'est normal, et c'est précisément le rôle de l'audit offert. En 45 minutes, on fait le point ensemble et tu repars avec un plan d'action concret — actionnable immédiatement, sans engagement de ta part.",
   },
   {
-    q: "Quels résultats puis-je espérer ?",
-    a: "À compléter — résultats concrets, exemples de clients.",
+    q: "Quel est le tarif ?",
+    a: "L'accompagnement est sur-mesure ; le tarif est défini après l'audit, selon tes besoins réels. L'audit est 100% offert et sans engagement.",
+  },
+  {
+    q: "Combien de temps ça prend ?",
+    a: "La durée est définie lors de l'audit, selon tes besoins. En général, compte entre 6 et 12 semaines. L'accompagnement s'adapte à ton rythme — l'objectif est d'aller à l'essentiel sans te surcharger.",
   },
 ];
 ---
@@ -37,64 +41,85 @@ const items = [
         <span class="text-sm font-medium tracking-widest uppercase text-accent">
           Questions fréquentes
         </span>
-        <h2 class="font-heading font-bold text-3xl md:text-4xl text-text-on-light">
+        <h2
+          class="font-heading font-bold text-3xl md:text-4xl text-text-on-light"
+        >
           FAQ
         </h2>
       </div>
       <ul class="flex flex-col divide-y divide-text-on-light/10">
-        {items.map((item, i) => (
-          <li>
-            <button
-              class="w-full flex items-center justify-between gap-4 py-6 text-left text-text-on-light font-semibold text-lg hover:text-accent transition-colors duration-200"
-              aria-expanded="false"
-              aria-controls={`faq-answer-${i}`}
-            >
-              {item.q}
-              <span class="text-accent text-2xl leading-none shrink-0 transition-transform duration-300" aria-hidden="true">+</span>
-            </button>
-            <div
-              id={`faq-answer-${i}`}
-              class="grid transition-[grid-template-rows] duration-350 ease-in-out"
-              style="grid-template-rows: 0fr;"
-            >
-              <div class="overflow-hidden">
-                <p class="text-text-on-light-muted pb-6 leading-relaxed">{item.a}</p>
+        {
+          items.map((item, i) => (
+            <li>
+              <button
+                class="w-full flex items-center justify-between gap-4 py-6 text-left text-text-on-light font-semibold text-lg hover:text-accent transition-colors duration-200"
+                aria-expanded="false"
+                aria-controls={`faq-answer-${i}`}
+              >
+                {item.q}
+                <span
+                  class="text-accent text-2xl leading-none shrink-0 transition-transform duration-300"
+                  aria-hidden="true"
+                >
+                  +
+                </span>
+              </button>
+              <div
+                id={`faq-answer-${i}`}
+                class="grid transition-[grid-template-rows] duration-350 ease-in-out"
+                style="grid-template-rows: 0fr;"
+              >
+                <div class="overflow-hidden">
+                  <p class="text-text-on-light-muted pb-6 leading-relaxed">
+                    {item.a}
+                  </p>
+                </div>
               </div>
-            </div>
-          </li>
-        ))}
+            </li>
+          ))
+        }
       </ul>
     </div>
   </Container>
 </Section>
 
 <script>
-  function openItem(btn: HTMLButtonElement, answer: HTMLElement, icon: HTMLElement) {
+  function openItem(
+    btn: HTMLButtonElement,
+    answer: HTMLElement,
+    icon: HTMLElement,
+  ) {
     btn.setAttribute("aria-expanded", "true");
     answer.style.gridTemplateRows = "1fr";
     icon.style.transform = "rotate(45deg)";
   }
 
-  function closeItem(btn: HTMLButtonElement, answer: HTMLElement, icon: HTMLElement) {
+  function closeItem(
+    btn: HTMLButtonElement,
+    answer: HTMLElement,
+    icon: HTMLElement,
+  ) {
     btn.setAttribute("aria-expanded", "false");
     answer.style.gridTemplateRows = "0fr";
     icon.style.transform = "rotate(0deg)";
   }
 
-  document.querySelectorAll<HTMLButtonElement>("[aria-controls]").forEach((btn) => {
-    const answerId = btn.getAttribute("aria-controls");
-    if (!answerId) return;
-    const answer = document.getElementById(answerId) as HTMLElement;
-    const icon = btn.querySelector<HTMLElement>("[aria-hidden]");
-    if (!answer || !icon) return;
+  document
+    .querySelectorAll<HTMLButtonElement>("[aria-controls]")
+    .forEach((btn) => {
+      const answerId = btn.getAttribute("aria-controls");
+      if (!answerId) return;
+      const answer = document.getElementById(answerId) as HTMLElement;
+      const icon = btn.querySelector<HTMLElement>("[aria-hidden]");
+      if (!answer || !icon) return;
 
-    btn.addEventListener("click", () => {
-      const isOpen = btn.getAttribute("aria-expanded") === "true";
-      if (isOpen) {
-        closeItem(btn, answer, icon);
-      } else {
-        openItem(btn, answer, icon);
-      }
+      btn.addEventListener("click", () => {
+        const isOpen = btn.getAttribute("aria-expanded") === "true";
+        if (isOpen) {
+          closeItem(btn, answer, icon);
+        } else {
+          openItem(btn, answer, icon);
+        }
+      });
     });
-  });
 </script>

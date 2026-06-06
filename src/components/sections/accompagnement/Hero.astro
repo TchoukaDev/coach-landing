@@ -1,38 +1,160 @@
 ---
-import Section from "../../ui/Section.astro";
-import Container from "../../ui/Container.astro";
 import Button from "../../ui/Button.astro";
+import Container from "../../ui/Container.astro";
 ---
 
-<Section variant="dark" className="min-h-svh flex items-center justify-center">
-  <Container size="md">
-    <div class="flex flex-col items-center text-center gap-6">
-      <span
-        class="text-sm font-medium tracking-widest uppercase text-accent border border-accent/30 rounded-full px-4 py-1.5"
+<section
+  class="relative overflow-hidden min-h-screen bg-bg-dark flex flex-col justify-center items-center text-center px-6 py-20"
+>
+  <!-- Orbes animés -->
+  <div class="hero-orb hero-orb--1" aria-hidden="true"></div>
+  <div class="hero-orb hero-orb--2" aria-hidden="true"></div>
+  <div class="hero-orb hero-orb--3" aria-hidden="true"></div>
+
+  <!-- Grille de fond -->
+  <div class="section-grid" aria-hidden="true"></div>
+
+  <div class="relative z-10 w-full">
+    <Container>
+      <p
+        class="text-sm uppercase tracking-widest text-accent font-medium mb-10"
       >
-        Accompagnement global
-      </span>
-      <h1 class="text-text-on-dark">
-        Titre accrocheur de l'offre<br />
-        <span
-          class="bg-gradient-to-r from-accent to-amber-400 bg-clip-text text-transparent"
-        >
-          à compléter
-        </span>
-      </h1>
-      <span class="animate-expand-x bg-accent"></span>
-      <p class="text-text-on-dark-muted text-lg max-w-xl">
-        Sous-titre de l'offre d'accompagnement — à compléter.
+        Accompagnement pour coachs de vie et thérapeutes
       </p>
-      <div id="hero-cta" class="flex flex-col sm:flex-row gap-4 mt-4">
+      <h1>
+        Attire tes
+        <span
+          class="bg-linear-to-r from-accent-hover to-accent bg-clip-text text-transparent"
+        >
+          clients idéaux
+        </span><br />
+        sans t'épuiser sur les réseaux sociaux.
+      </h1>
+      <div class="bg-accent animate-expand-x flex justify-center mx-auto w-1/2">
+      </div>
+      <p class="text-text-on-dark-muted md:text-xl font-heading my-8">
+        J'aide les coachs et thérapeutes à attirer leurs clients idéaux grâce à
+        une présence digitale claire, professionnelle et alignée avec leurs
+        valeurs.
+      </p>
+      <div
+        id="hero-cta"
+        class="flex flex-col items-center justify-center md:flex-row gap-4 mt-10"
+      >
         <Button
-          text="Réserve un appel"
-          variant="primary"
           href="https://calendly.com/contact-romainwirth/page-pour-coachs-et-therapeutique"
           target="_blank"
+          variant="primary"
+          text="Réserve ton audit stratégique gratuit"
         />
-        <Button text="Découvrir l'offre" variant="secondary" href="#context" />
+        <Button variant="secondary" text="Découvrir l'accompagnement" />
       </div>
-    </div>
-  </Container>
-</Section>
+    </Container>
+  </div>
+</section>
+
+<script>
+  const scrollBtn =
+    document.querySelector<HTMLButtonElement>("#hero-cta button");
+  const target = document.getElementById("douleurs");
+  if (scrollBtn && target) {
+    scrollBtn.addEventListener("click", () => {
+      target.scrollIntoView({ behavior: "smooth" });
+    });
+  }
+</script>
+
+<style>
+  .hero-orb {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(80px);
+    opacity: 0.12;
+    pointer-events: none;
+  }
+
+  @media (min-width: 1024px) {
+    .hero-orb {
+      opacity: 0.15;
+    }
+  }
+
+  .hero-orb--1 {
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, #c4704a, transparent 70%);
+    top: -15%;
+    left: -10%;
+    animation: orb-float-1 18s ease-in-out infinite;
+  }
+
+  .hero-orb--2 {
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, #b8603a, transparent 70%);
+    bottom: -10%;
+    right: -5%;
+    animation: orb-float-2 22s ease-in-out infinite;
+  }
+
+  .hero-orb--3 {
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, #d4895e, transparent 70%);
+    top: 40%;
+    left: 55%;
+    opacity: 0.12;
+    animation: orb-float-3 15s ease-in-out infinite;
+  }
+
+  @media (min-width: 1024px) {
+    .hero-orb--1 {
+      width: 600px;
+      height: 600px;
+    }
+    .hero-orb--2 {
+      width: 500px;
+      height: 500px;
+    }
+    .hero-orb--3 {
+      width: 350px;
+      height: 350px;
+    }
+  }
+
+  @keyframes orb-float-1 {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+    33% {
+      transform: translate(60px, 40px) scale(1.05);
+    }
+    66% {
+      transform: translate(-30px, 60px) scale(0.95);
+    }
+  }
+
+  @keyframes orb-float-2 {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+    33% {
+      transform: translate(-50px, -40px) scale(1.08);
+    }
+    66% {
+      transform: translate(40px, -20px) scale(0.97);
+    }
+  }
+
+  @keyframes orb-float-3 {
+    0%,
+    100% {
+      transform: translate(0, 0);
+    }
+    50% {
+      transform: translate(-40px, 30px);
+    }
+  }
+</style>

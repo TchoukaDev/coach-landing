@@ -4,41 +4,46 @@ import Container from "../../ui/Container.astro";
 
 const testimonials = [
   {
-    quote: "Témoignage client à compléter — résultat concret obtenu grâce à l'accompagnement.",
-    name: "Prénom Nom",
-    role: "Titre / activité",
+    quote:
+      "En quelques jours seulement, il a su cerner mes envies, comprendre la structure que je souhaitais et intégrer ce que j'aimais visuellement — sans que j'aie besoin de tout expliquer dans les détails. Le résultat est à la fois professionnel et fidèle à mon image. Rarement rencontré quelqu'un d'aussi à l'écoute et aussi efficace.",
+    name: "Élodie - ELG Avenir",
+    role: "Google",
+    stars: 5,
   },
   {
-    quote: "Deuxième témoignage à compléter — transformation vécue, impact sur l'activité.",
-    name: "Prénom Nom",
-    role: "Titre / activité",
+    quote:
+      "Un développeur professionnel et passionné, de bon conseil et à l'écoute de mes besoins, disponible et très réactif. Le résultat dépasse largement mes attentes.",
+    name: "Clothilde Baudet - Psychologue clinicienne",
+    role: "Google",
+    stars: 5,
   },
 ];
 ---
 
-<Section variant="dark">
+<Section variant="alt">
   <Container size="md">
-    <div class="flex flex-col gap-12">
-      <div class="flex flex-col gap-4">
-        <span class="text-sm font-medium tracking-widest uppercase text-accent">
-          Ils sont passés par là, et vous ?
-        </span>
-        <h2 class="font-heading font-bold text-3xl md:text-4xl text-text-on-dark">
-          Témoignages — à compléter
-        </h2>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {testimonials.map((t) => (
-          <div class="border border-white/10 rounded-2xl p-8 bg-bg-dark flex flex-col gap-6">
-            <span class="text-5xl font-heading text-accent/30 leading-none">"</span>
-            <p class="text-text-on-dark-muted text-lg leading-relaxed italic">{t.quote}</p>
+    <h2 class="text-sm uppercase tracking-widest text-accent font-medium mb-12">
+      Ce que disent mes clients
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {
+        testimonials.map((t) => (
+          <div class="border border-text-on-light/10 rounded-2xl p-8 bg-white flex flex-col gap-6">
+            <div class="flex gap-0.5">
+              {Array.from({ length: t.stars }).map(() => (
+                <span class="text-accent text-lg">★</span>
+              ))}
+            </div>
+            <p class="text-text-on-light-muted text-lg leading-relaxed italic">
+              "{t.quote}"
+            </p>
             <div>
-              <p class="font-semibold text-text-on-dark">{t.name}</p>
-              <p class="text-text-on-dark-muted text-sm">{t.role}</p>
+              <p class="font-semibold text-text-on-light">{t.name}</p>
+              <p class="text-text-on-light-muted text-sm">{t.role}</p>
             </div>
           </div>
-        ))}
-      </div>
+        ))
+      }
     </div>
   </Container>
 </Section>

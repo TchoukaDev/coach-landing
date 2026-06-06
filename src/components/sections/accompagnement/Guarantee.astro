@@ -2,33 +2,35 @@
 import Section from "../../ui/Section.astro";
 import Container from "../../ui/Container.astro";
 
-const guarantees = [
-  "Garantie 14 jours satisfait ou remboursé",
-  "Accès à vie à la plateforme de formation",
-  "Accompagnement flexible et adapté à ton rythme",
-  "Aucun engagement sur le long terme",
+const engagements = [
+  "Des points d'étape réguliers",
+  "Des échanges en visio",
+  "Un accompagnement humain",
+  "Une aide concrète lorsque tu bloques",
 ];
 ---
 
 <Section variant="alt">
   <Container size="md">
-    <div class="flex flex-col gap-8">
-      <div class="flex flex-col gap-4">
-        <span class="text-sm font-medium tracking-widest uppercase text-accent">
-          Zéro risque, 100% sérénité
-        </span>
-        <h2 class="font-heading font-bold text-3xl md:text-4xl text-text-on-light">
-          La garantie — à compléter
-        </h2>
-      </div>
-      <ul class="flex flex-col gap-4">
-        {guarantees.map((g) => (
-          <li class="flex items-start gap-3 text-text-on-light-muted text-lg">
-            <span class="text-accent mt-0.5 shrink-0">✓</span>
-            {g}
-          </li>
-        ))}
-      </ul>
-    </div>
+    <h2 class="text-sm uppercase tracking-widest text-accent font-medium mb-10">
+      Mon engagement
+    </h2>
+    <p class="text-2xl md:text-3xl font-heading leading-relaxed text-text-on-light-muted mb-12">
+      Tu n'es jamais seul.<br />
+      <strong class="text-text-on-light font-semibold">Je reste disponible tout au long de l'accompagnement.</strong>
+    </p>
+    <p class="text-lg text-text-on-light-muted mb-6">Tu bénéficies :</p>
+    <ul class="flex flex-col gap-4 mb-12">
+      {engagements.map((item) => (
+        <li class="flex items-center gap-4 text-lg text-text-on-light-muted">
+          <span class="text-accent shrink-0">✔</span>
+          {item}
+        </li>
+      ))}
+    </ul>
+    <p class="text-text-on-light-muted text-lg leading-relaxed">
+      Mon objectif n'est pas simplement de livrer un outil.<br />
+      <strong class="text-text-on-light font-semibold">Mon objectif est que tu saches l'utiliser et que tu sois autonome.</strong>
+    </p>
   </Container>
 </Section>

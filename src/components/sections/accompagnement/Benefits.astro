@@ -2,61 +2,35 @@
 import Section from "../../ui/Section.astro";
 import Container from "../../ui/Container.astro";
 
-const bonuses = [
-  { title: "1 tunnel Systeme.io prêt à l'emploi", value: "100€" },
-  { title: "Pack de 6 visuels publicitaires Meta", value: "120€" },
-  { title: "Scripts email de nurturing", value: "80€" },
-  { title: "Check-list lancement pub", value: "50€" },
-  { title: "Planning stratégique sur 30 jours", value: "60€" },
-];
-
 const benefits = [
-  "Une stratégie claire et personnalisée",
-  "Un système de prospection qui tourne en automatique",
-  "Une meilleure visibilité et un message plus impactant",
-  "Des RDV réguliers avec des clients qualifiés",
-  "Plus de stabilité et de liberté",
+  "Un positionnement clair",
+  "Une stratégie digitale adaptée",
+  "Une image professionnelle",
+  "Un site pensé pour convertir",
+  "Un tunnel de vente opérationnel",
+  "Des outils simplifiés",
+  "Plus de sérénité dans ton activité",
+  "Davantage d'opportunités commerciales",
+  "Plus de temps pour accompagner tes clients",
 ];
 ---
 
-<Section variant="alt">
+<Section variant="light">
   <Container size="md">
-    <div class="flex flex-col gap-12">
-      <div class="flex flex-col gap-4">
-        <span class="text-sm font-medium tracking-widest uppercase text-accent">
-          Ce que vous recevez dès l'inscription
-        </span>
-        <h2 class="font-heading font-bold text-3xl md:text-4xl text-text-on-light">
-          Bonus & bénéfices — à compléter
-        </h2>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-        <div class="flex flex-col gap-4">
-          <h3 class="font-heading font-semibold text-xl text-text-on-light">Bonus inclus</h3>
-          <ul class="flex flex-col gap-3">
-            {bonuses.map((b) => (
-              <li class="flex items-center justify-between gap-4 text-text-on-light-muted">
-                <span>{b.title}</span>
-                <span class="text-accent font-semibold shrink-0">valeur : {b.value}</span>
-              </li>
-            ))}
-          </ul>
-          <p class="text-accent font-semibold mt-2">Valeur totale des bonus : 410€</p>
-        </div>
-
-        <div class="flex flex-col gap-4">
-          <h3 class="font-heading font-semibold text-xl text-text-on-light">Ce que vous aurez à la fin</h3>
-          <ul class="flex flex-col gap-3">
-            {benefits.map((b) => (
-              <li class="flex items-start gap-3 text-text-on-light-muted">
-                <span class="text-accent mt-0.5 shrink-0">✓</span>
-                {b}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </div>
+    <h2 class="text-sm uppercase tracking-widest text-accent font-medium mb-10">
+      À la fin de l'accompagnement
+    </h2>
+    <p class="text-2xl md:text-3xl font-heading leading-relaxed text-text-on-light-muted mb-12">
+      Ce que tu obtiens<br />
+      <strong class="text-text-on-light font-semibold">concrètement</strong>
+    </p>
+    <ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {benefits.map((item) => (
+        <li class="flex items-center gap-4 text-lg text-text-on-light-muted">
+          <span class="text-accent shrink-0">✔</span>
+          {item}
+        </li>
+      ))}
+    </ul>
   </Container>
 </Section>

@@ -28,6 +28,9 @@ const baseStyles =
   id={id}
   data-animate
 >
+  {resolvedVariant === "dark" && (
+    <div class="section-grid" aria-hidden="true"></div>
+  )}
   <slot />
 </section>
 

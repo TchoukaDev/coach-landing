@@ -3,33 +3,40 @@ import Section from "../../ui/Section.astro";
 import Container from "../../ui/Container.astro";
 
 const pains = [
-  "Vous en avez marre de courir après les clients",
-  "Vous passez du temps à poster sans retour",
-  "Vous ne savez plus à qui vous adresser",
-  "Vous doutez de vos prix, votre offre, vos choix",
-  "Vous êtes bloqué(e) car vous êtes seul(e)",
+  "N'ont pas de positionnement clair",
+  "Communiquent sans stratégie",
+  "Publient régulièrement sans résultat",
+  "N'ont pas de site internet ou un site qui ne convertit pas",
+  "Dépendent uniquement du bouche à oreille",
+  "Passent plus de temps à gérer des outils qu'à accompagner leurs clients",
 ];
 ---
 
-<Section variant="alt">
+<Section id="douleurs">
   <Container size="md">
-    <div class="flex flex-col gap-8">
-      <span
-        class="text-sm font-medium tracking-widest uppercase text-accent"
+    <h2 class="text-sm uppercase tracking-widest text-accent font-medium mb-10">
+      Tu te reconnais ?
+    </h2>
+    <p
+      class="text-2xl md:text-3xl font-heading leading-relaxed text-text-on-light-muted mb-12"
+    >
+      Pourquoi tant de coachs et thérapeutes<br />
+      <strong class="text-text-on-light font-semibold"
+        >peinent à trouver des clients ?</strong
       >
-        Est-ce que ça vous parle ?
-      </span>
-      <h2 class="font-heading font-bold text-3xl md:text-4xl text-text-on-light">
-        Les douleurs de ta cible — à compléter
-      </h2>
-      <ul class="flex flex-col gap-4">
-        {pains.map((pain) => (
-          <li class="flex items-start gap-3 text-text-on-light-muted text-lg">
-            <span class="text-accent mt-1 shrink-0">✗</span>
+    </p>
+    <p class="text-lg text-text-on-light-muted mb-8">
+      Aujourd'hui, beaucoup de professionnels de l'accompagnement :
+    </p>
+    <ul class="flex flex-col gap-4">
+      {
+        pains.map((pain) => (
+          <li class="flex items-start gap-4 text-lg text-text-on-light-muted">
+            <span class="text-accent font-bold mt-0.5 shrink-0">✗</span>
             {pain}
           </li>
-        ))}
-      </ul>
-    </div>
+        ))
+      }
+    </ul>
   </Container>
 </Section>

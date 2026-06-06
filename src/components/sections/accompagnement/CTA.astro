@@ -1,43 +1,96 @@
 ---
-import Section from "../../ui/Section.astro";
 import Container from "../../ui/Container.astro";
 import Button from "../../ui/Button.astro";
-
-const inclusions = [
-  "Accès complet à la formation",
-  "Tous les supports + templates prêts à l'emploi",
-  "Coaching / suivi selon formule",
-  "Tous les bonus + livrables concrets",
-  "Méthode, structure, stratégie, mise en action",
-];
 ---
 
-<Section variant="dark">
-  <Container size="sm">
-    <div class="flex flex-col items-center text-center gap-8">
-      <span class="text-sm font-medium tracking-widest uppercase text-accent">
-        Prêt à passer à l'action ?
-      </span>
-      <h2 class="font-heading font-bold text-3xl md:text-4xl text-text-on-dark">
-        Tout ce que vous recevez — à compléter
-      </h2>
-      <ul class="flex flex-col gap-3 text-left w-full max-w-sm">
-        {inclusions.map((item) => (
-          <li class="flex items-start gap-3 text-text-on-dark-muted">
-            <span class="text-accent mt-0.5 shrink-0">✓</span>
-            {item}
-          </li>
-        ))}
-      </ul>
-      <Button
-        text="Réserve ton appel découverte"
-        variant="primary"
-        href="https://calendly.com/contact-romainwirth/page-pour-coachs-et-therapeutique"
-        target="_blank"
-      />
-      <p class="text-text-on-dark-muted text-sm">
-        Appel gratuit, sans engagement · 30 min
-      </p>
-    </div>
-  </Container>
-</Section>
+<div id="cta-wrapper">
+  <!-- Section 1 : accroche, sticky -->
+  <section
+    id="cta-urgency"
+    class="py-24 px-6 bg-bg-dark flex items-center justify-center min-h-screen md:sticky md:top-0 md:z-10 md:h-screen"
+  >
+    <Container size="sm">
+      <div class="flex flex-col items-center text-center gap-6">
+        <span class="text-sm font-medium tracking-widest uppercase text-accent">
+          Prêt à passer à l'action ?
+        </span>
+        <p class="text-2xl md:text-3xl font-heading font-bold text-text-on-dark">
+          Combien de temps encore vas-tu attendre avant de rendre ton activité
+          <span class="bg-linear-to-r from-accent-hover to-accent bg-clip-text text-transparent">visible</span> ?
+        </p>
+        <p class="text-lg text-text-on-dark-muted leading-relaxed">
+          Chaque mois passé sans stratégie claire est un mois pendant lequel de potentiels clients ne te trouvent pas.
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Section 2 : CTA, recouvre depuis le bas -->
+  <section
+    id="cta-action"
+    class="py-24 px-6 bg-bg-dark flex items-center justify-center min-h-screen will-change-transform md:sticky md:top-0 md:z-20 md:h-screen"
+  >
+    <Container size="sm">
+      <div class="flex flex-col items-center text-center gap-6">
+        <p class="text-2xl md:text-3xl font-heading font-bold text-text-on-dark leading-snug">
+          L'objectif n'est pas simplement de créer des outils.<br />
+          C'est de construire un système qui soutient durablement ton activité.
+        </p>
+        <div class="flex flex-col items-center gap-3 mt-4">
+          <Button
+            href="https://calendly.com/contact-romainwirth/page-pour-coachs-et-therapeutique"
+            target="_blank"
+            variant="primary"
+            text="Réserve ton audit stratégique gratuit"
+          />
+          <p class="text-text-on-dark-muted text-sm">
+            45 min · 100% offert · sans engagement
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+</div>
+
+<style>
+  @media (min-width: 768px) {
+    #cta-action {
+      transform: translateY(100vh);
+    }
+  }
+</style>
+
+<script>
+  const wrapper = document.getElementById("cta-wrapper");
+  const cover = document.getElementById("cta-action");
+
+  function update() {
+    if (!wrapper || !cover) return;
+
+    const vh = window.innerHeight;
+
+    if (window.innerWidth < 768) {
+      wrapper.style.height = "";
+      cover.style.transform = "";
+      cover.style.boxShadow = "";
+      return;
+    }
+
+    const coverPause = Math.round(vh * 0.05);
+    const coverDistance = Math.round(vh * 0.6);
+    const readTime = Math.round(vh * 0.8);
+
+    wrapper.style.height = `calc(100vh + ${coverPause + coverDistance + readTime}px)`;
+
+    const scrolled = window.scrollY - wrapper.offsetTop;
+    const coverStart = coverPause;
+    const coverProgress = Math.max(0, Math.min(1, (scrolled - coverStart) / coverDistance));
+
+    cover.style.transform = `translateY(${(1 - coverProgress) * 100}vh)`;
+    cover.style.boxShadow = coverProgress > 0 ? "0 -16px 40px rgba(0,0,0,0.4)" : "";
+  }
+
+  window.addEventListener("scroll", update, { passive: true });
+  window.addEventListener("resize", update, { passive: true });
+  update();
+</script>

@@ -1,37 +1,100 @@
 ---
-import Section from "../../ui/Section.astro";
-import Container from "../../ui/Container.astro";
-
 const steps = [
-  { num: "01", title: "Étape 1 — à compléter", benefit: "Mini bénéfice de l'étape" },
-  { num: "02", title: "Étape 2 — à compléter", benefit: "Mini bénéfice de l'étape" },
-  { num: "03", title: "Étape 3 — à compléter", benefit: "Mini bénéfice de l'étape" },
-  { num: "04", title: "Étape 4 — à compléter", benefit: "Mini bénéfice de l'étape" },
+  {
+    num: "01",
+    title: "Clarification du positionnement",
+    detail: "On définit ta cible et ton offre",
+  },
+  {
+    num: "02",
+    title: "Choix des outils",
+    detail: "On détermine ce qui est adapté à ton activité",
+  },
+  {
+    num: "03",
+    title: "Création de ton système d'acquisition",
+    detail: "On construit ensemble ce dont tu as besoin",
+  },
+  {
+    num: "04",
+    title: "Formation et autonomie",
+    detail: "Tu apprends à gérer ton système seul",
+  },
 ];
 ---
 
-<Section variant="alt">
-  <Container size="md">
-    <div class="flex flex-col gap-12">
-      <div class="flex flex-col gap-4">
-        <span class="text-sm font-medium tracking-widest uppercase text-accent">
-          Voici comment on va y arriver
-        </span>
-        <h2 class="font-heading font-bold text-3xl md:text-4xl text-text-on-light">
-          La méthode — à compléter
-        </h2>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {steps.map((step) => (
-          <div class="flex gap-4 items-start">
-            <span class="text-3xl font-heading font-bold text-accent/30 shrink-0 leading-none">{step.num}</span>
-            <div class="flex flex-col gap-1">
-              <h3 class="font-heading font-semibold text-xl text-text-on-light">{step.title}</h3>
-              <p class="text-text-on-light-muted">{step.benefit}</p>
-            </div>
-          </div>
-        ))}
-      </div>
+<div id="method-wrapper">
+  <section
+    id="method-section"
+    class="py-24 px-6 bg-bg-dark md:sticky md:top-0 md:z-10 md:h-screen md:overflow-hidden"
+  >
+    <div class="max-w-4xl mx-auto mb-16">
+      <h2 class="text-sm uppercase tracking-widest text-accent font-medium mb-4">
+        Le process
+      </h2>
+      <p class="text-2xl md:text-3xl font-heading text-text-on-dark-muted">
+        En général 6 à 12 semaines pour construire<br />
+        <strong class="text-text-on-dark font-semibold">un système cohérent et adapté à ton activité</strong>
+      </p>
     </div>
-  </Container>
-</Section>
+
+    <ol
+      id="method-track"
+      class="flex gap-6 px-6 list-none will-change-transform flex-col md:flex-row md:flex-nowrap"
+    >
+      {steps.map((step) => (
+        <li class="bg-white/5 border border-white/10 rounded-2xl p-8 flex flex-col gap-4 w-full md:min-w-[clamp(280px,32vw,420px)] md:max-w-[420px] md:shrink-0">
+          <span class="font-heading text-5xl font-bold text-accent/30 leading-none">
+            {step.num}
+          </span>
+          <h3 class="text-xl font-heading font-semibold text-text-on-dark">
+            {step.title}
+          </h3>
+          <p class="text-text-on-dark-muted text-base leading-relaxed">
+            {step.detail}
+          </p>
+        </li>
+      ))}
+    </ol>
+  </section>
+</div>
+
+<script>
+  const wrapper = document.getElementById("method-wrapper");
+  const track = document.getElementById("method-track");
+
+  function update() {
+    if (!wrapper || !track) return;
+
+    if (window.innerWidth < 768) {
+      wrapper.style.height = "";
+      track.style.transform = "";
+      track.style.justifyContent = "";
+      return;
+    }
+
+    const maxTranslate = track.scrollWidth - window.innerWidth + 48;
+    const hasHScroll = maxTranslate > 48;
+
+    if (hasHScroll) {
+      track.style.justifyContent = "";
+    } else {
+      track.style.justifyContent = "center";
+      track.style.transform = "";
+    }
+
+    const readTime = Math.round(window.innerHeight * 0.8);
+    const totalExtra = (hasHScroll ? maxTranslate : 0) + readTime;
+    wrapper.style.height = `calc(100vh + ${totalExtra}px)`;
+
+    if (hasHScroll) {
+      const scrolled = window.scrollY - wrapper.offsetTop;
+      const hProgress = Math.max(0, Math.min(1, scrolled / maxTranslate));
+      track.style.transform = `translateX(${-hProgress * maxTranslate}px)`;
+    }
+  }
+
+  window.addEventListener("scroll", update, { passive: true });
+  window.addEventListener("resize", update, { passive: true });
+  update();
+</script>

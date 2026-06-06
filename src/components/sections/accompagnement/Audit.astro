@@ -1,0 +1,68 @@
+---
+import Section from "../../ui/Section.astro";
+import Container from "../../ui/Container.astro";
+import Button from "../../ui/Button.astro";
+
+const points = [
+  "Ton activité",
+  "Ton positionnement",
+  "Tes outils actuels",
+  "Tes freins",
+  "Tes opportunités",
+];
+---
+
+<Section variant="light">
+  <Container size="md">
+    <h2 class="text-sm uppercase tracking-widest text-accent font-medium mb-10">
+      Par où commencer ?
+    </h2>
+    <p
+      class="text-2xl md:text-3xl font-heading leading-relaxed text-text-on-light-muted mb-16"
+    >
+      Un accompagnement sur mesure pour transformer<br />
+      <strong class="text-text-on-light font-semibold"
+        >ta présence digitale en outil d'acquisition</strong
+      >
+    </p>
+
+    <div class="flex flex-col md:flex-row gap-12 md:gap-20 items-start">
+      <div class="flex flex-col gap-6 flex-1">
+        <h3 class="text-xl font-heading font-bold text-text-on-light">
+          Audit stratégique offert · 45 min
+        </h3>
+        <p class="text-text-on-light-muted text-lg leading-relaxed">
+          Première étape : faire le point sur ton activité. Nous analysons
+          ensemble :
+        </p>
+        <ul class="flex flex-col gap-3">
+          {
+            points.map((point) => (
+              <li class="flex items-center gap-3 text-text-on-light-muted text-lg">
+                <span class="text-accent shrink-0">✔</span>
+                {point}
+              </li>
+            ))
+          }
+        </ul>
+        <p
+          class="text-text-on-light font-medium text-lg leading-relaxed mt-2 text-center"
+        >
+          À l'issue de cet échange, tu repars avec un plan d'action personnalisé
+          et des recommandations concrètes.
+        </p>
+        <div class="mt-4 flex flex-col gap-3 justify-center items-center">
+          <Button
+            href="https://calendly.com/contact-romainwirth/page-pour-coachs-et-therapeutique"
+            target="_blank"
+            variant="primary"
+            text="Réserve ton audit gratuit"
+          />
+          <p class="text-text-on-light-muted text-sm mt-3">
+            Sans engagement · 45 min · 100% offert
+          </p>
+        </div>
+      </div>
+    </div>
+  </Container>
+</Section>

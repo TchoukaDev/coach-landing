@@ -41,7 +41,7 @@
 
     /* Pas de couleur globale sur h2/h3 — chaque composant gère son contexte clair/sombre */
     h1 {
-        @apply text-4xl md:text-6xl font-bold font-heading tracking-tight my-8 text-text-on-dark;
+        @apply text-4xl md:text-6xl font-bold font-heading tracking-tight my-8 text-text-on-dark leading-tight;
     }
 
     h2 {
@@ -63,6 +63,18 @@ input:-webkit-autofill:focus {
 
 input[data-autocompleted] {
     background-color: transparent !important;
+}
+
+/* Grille décorative — sections dark */
+.section-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(196, 112, 74, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(196, 112, 74, 0.06) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 100%);
+    pointer-events: none;
 }
 
 /* Ligne décorative animée — utilisée dans Hero */
