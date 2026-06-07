@@ -14,12 +14,18 @@ import Button from "../../ui/Button.astro";
         <span class="text-sm font-medium tracking-widest uppercase text-accent">
           Prêt à passer à l'action ?
         </span>
-        <p class="text-2xl md:text-3xl font-heading font-bold text-text-on-dark">
+        <p
+          class="text-2xl md:text-3xl font-heading font-bold text-text-on-dark"
+        >
           Combien de temps encore vas-tu attendre avant de rendre ton activité
-          <span class="bg-linear-to-r from-accent-hover to-accent bg-clip-text text-transparent">visible</span> ?
+          <span
+            class="bg-linear-to-r from-accent-hover to-accent bg-clip-text text-transparent"
+            >visible</span
+          > ?
         </p>
         <p class="text-lg text-text-on-dark-muted leading-relaxed">
-          Chaque mois passé sans stratégie claire est un mois pendant lequel de potentiels clients ne te trouvent pas.
+          Chaque mois passé sans stratégie claire est un mois pendant lequel de
+          potentiels clients ne te trouvent pas.
         </p>
       </div>
     </Container>
@@ -31,9 +37,15 @@ import Button from "../../ui/Button.astro";
     class="py-24 px-6 bg-bg-dark flex items-center justify-center will-change-transform md:sticky md:top-0 md:z-20 md:h-screen md:min-h-screen"
   >
     <Container size="sm">
-      <div class="flex flex-col items-center text-center gap-6">
-        <p class="text-2xl md:text-3xl font-heading font-bold text-text-on-dark leading-snug">
+      <div class="flex flex-col items-center text-center gap-10">
+        <p
+          class="text-lg font-heading font-bold text-text-on-dark-muted leading-snug"
+        >
           L'objectif n'est pas simplement de créer des outils.<br />
+        </p>
+        <p
+          class="text-text-on-dark text-2xl md:text-3xl font-heading font-bold"
+        >
           C'est de construire un système qui soutient durablement ton activité.
         </p>
         <div class="flex flex-col items-center gap-3 mt-4">
@@ -84,10 +96,14 @@ import Button from "../../ui/Button.astro";
 
     const scrolled = window.scrollY - wrapper.offsetTop;
     const coverStart = coverPause;
-    const coverProgress = Math.max(0, Math.min(1, (scrolled - coverStart) / coverDistance));
+    const coverProgress = Math.max(
+      0,
+      Math.min(1, (scrolled - coverStart) / coverDistance),
+    );
 
     cover.style.transform = `translateY(${(1 - coverProgress) * 100}vh)`;
-    cover.style.boxShadow = coverProgress > 0 ? "0 -16px 40px rgba(0,0,0,0.4)" : "";
+    cover.style.boxShadow =
+      coverProgress > 0 ? "0 -16px 40px rgba(0,0,0,0.4)" : "";
   }
 
   window.addEventListener("scroll", update, { passive: true });
