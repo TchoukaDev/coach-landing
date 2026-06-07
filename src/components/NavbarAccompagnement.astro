@@ -1,5 +1,6 @@
 ---
 import Container from "./ui/Container.astro";
+import Image from "astro/components/Image.astro";
 
 const navLinks = [
   { label: "L'offre", target: "douleurs" },
@@ -16,18 +17,34 @@ const navLinks = [
 >
   <Container>
     <div class="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
-      <span class="font-semibold text-text-on-dark font-heading text-lg">Romain Wirth</span>
-
+      <div class="flex items-center gap-2">
+        <div
+          class="relative hidden sm:block aspect-square w-15 h-15 lg:w-20 lg:h-20"
+        >
+          <Image
+            src="/logo-transparent.png"
+            alt="Logo Romain Wirth"
+            width={80}
+            height={80}
+          />
+        </div>
+        <span
+          class="font-semibold text-text-on-dark font-heading text-base md:text-lg"
+          >Romain Wirth</span
+        >
+      </div>
       <!-- Desktop nav -->
       <nav class="hidden md:flex items-center gap-8">
-        {navLinks.map((link) => (
-          <button
-            class={`nav-link text-sm transition-colors duration-200 cursor-pointer ${link.accent ? "text-accent hover:text-accent-hover font-medium" : "text-text-on-dark-muted hover:text-text-on-dark"}`}
-            data-target={link.target}
-          >
-            {link.label}
-          </button>
-        ))}
+        {
+          navLinks.map((link) => (
+            <button
+              class={`nav-link text-sm transition-colors duration-200 cursor-pointer ${link.accent ? "text-accent hover:text-accent-hover font-medium" : "text-text-on-dark-muted hover:text-text-on-dark"}`}
+              data-target={link.target}
+            >
+              {link.label}
+            </button>
+          ))
+        }
       </nav>
 
       <div class="flex items-center gap-4">
@@ -48,9 +65,15 @@ const navLinks = [
           aria-label="Menu"
           aria-expanded="false"
         >
-          <span class="burger-line block w-6 h-0.5 bg-text-on-dark transition-all duration-300"></span>
-          <span class="burger-line block w-6 h-0.5 bg-text-on-dark transition-all duration-300"></span>
-          <span class="burger-line block w-6 h-0.5 bg-text-on-dark transition-all duration-300"></span>
+          <span
+            class="burger-line block w-6 h-0.5 bg-text-on-dark transition-all duration-300"
+          ></span>
+          <span
+            class="burger-line block w-6 h-0.5 bg-text-on-dark transition-all duration-300"
+          ></span>
+          <span
+            class="burger-line block w-6 h-0.5 bg-text-on-dark transition-all duration-300"
+          ></span>
         </button>
       </div>
     </div>
@@ -62,14 +85,16 @@ const navLinks = [
   id="mobile-menu"
   class="fixed inset-0 z-40 bg-bg-dark flex flex-col justify-center items-center gap-8 opacity-0 pointer-events-none transition-opacity duration-300"
 >
-  {navLinks.map((link) => (
-    <button
-      class={`mobile-nav-link text-2xl font-heading font-semibold transition-colors duration-200 cursor-pointer ${link.accent ? "text-accent" : "text-text-on-dark hover:text-accent"}`}
-      data-target={link.target}
-    >
-      {link.label}
-    </button>
-  ))}
+  {
+    navLinks.map((link) => (
+      <button
+        class={`mobile-nav-link text-2xl font-heading font-semibold transition-colors duration-200 cursor-pointer ${link.accent ? "text-accent" : "text-text-on-dark hover:text-accent"}`}
+        data-target={link.target}
+      >
+        {link.label}
+      </button>
+    ))
+  }
   <a
     href="https://calendly.com/contact-romainwirth/offre-visibilite"
     target="_blank"
@@ -108,28 +133,43 @@ const navLinks = [
     document.body.style.overflow = "";
   }
 
-  burgerBtn?.addEventListener("click", () => menuOpen ? closeMenu() : openMenu());
+  burgerBtn?.addEventListener("click", () =>
+    menuOpen ? closeMenu() : openMenu(),
+  );
 
   function scrollTo(targetId: string) {
     const target = document.getElementById(targetId);
     target?.scrollIntoView({ behavior: "smooth" });
   }
 
-  document.querySelectorAll<HTMLButtonElement>(".nav-link, .mobile-nav-link").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      scrollTo(btn.dataset.target ?? "");
-      closeMenu();
+  document
+    .querySelectorAll<HTMLButtonElement>(".nav-link, .mobile-nav-link")
+    .forEach((btn) => {
+      btn.addEventListener("click", () => {
+        scrollTo(btn.dataset.target ?? "");
+        closeMenu();
+      });
     });
-  });
 
-  window.addEventListener("scroll", () => {
-    if (window.scrollY > 10) {
-      navbar?.classList.add("bg-gray-950/80", "backdrop-blur-md", "border-accent/50");
-      navbar?.classList.remove("border-transparent");
-    } else {
-      navbar?.classList.remove("bg-gray-950/80", "backdrop-blur-md", "border-accent/50");
-      navbar?.classList.add("border-transparent");
-    }
-  }, { passive: true });
-
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (window.scrollY > 10) {
+        navbar?.classList.add(
+          "bg-gray-950/80",
+          "backdrop-blur-md",
+          "border-accent/50",
+        );
+        navbar?.classList.remove("border-transparent");
+      } else {
+        navbar?.classList.remove(
+          "bg-gray-950/80",
+          "backdrop-blur-md",
+          "border-accent/50",
+        );
+        navbar?.classList.add("border-transparent");
+      }
+    },
+    { passive: true },
+  );
 </script>
