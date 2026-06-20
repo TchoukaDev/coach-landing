@@ -95,3 +95,94 @@ input[data-autocompleted] {
     animation: expand-x 0.5s ease forwards;
     animation-delay: 200ms;
 }
+
+/* Avatars empilés — preuve sociale Hero accompagnement */
+.social-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 9999px;
+    border: 2px solid #0a0a0a; /* couleur bg-dark pour effet de séparation entre cercles */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 0.875rem;
+    font-weight: 600;
+    font-family: var(--font-body, sans-serif);
+    flex-shrink: 0;
+}
+
+/* Orbes flottants — Hero accompagnement */
+.hero-orb {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(80px);
+    opacity: 0.12;
+    pointer-events: none;
+}
+
+@media (min-width: 1024px) {
+    .hero-orb {
+        opacity: 0.15;
+    }
+}
+
+.hero-orb--1 {
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, #c4704a, transparent 70%);
+    top: -15%;
+    left: -10%;
+    animation: orb-float-1 18s ease-in-out infinite;
+}
+
+.hero-orb--2 {
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, #b8603a, transparent 70%);
+    bottom: -10%;
+    right: -5%;
+    animation: orb-float-2 22s ease-in-out infinite;
+}
+
+.hero-orb--3 {
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, #d4895e, transparent 70%);
+    top: 40%;
+    left: 55%;
+    opacity: 0.12;
+    animation: orb-float-3 15s ease-in-out infinite;
+}
+
+@media (min-width: 1024px) {
+    .hero-orb--1 {
+        width: 600px;
+        height: 600px;
+    }
+    .hero-orb--2 {
+        width: 500px;
+        height: 500px;
+    }
+    .hero-orb--3 {
+        width: 350px;
+        height: 350px;
+    }
+}
+
+@keyframes orb-float-1 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33%       { transform: translate(60px, 40px) scale(1.05); }
+    66%       { transform: translate(-30px, 60px) scale(0.95); }
+}
+
+@keyframes orb-float-2 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33%       { transform: translate(-50px, -40px) scale(1.08); }
+    66%       { transform: translate(40px, -20px) scale(0.97); }
+}
+
+@keyframes orb-float-3 {
+    0%, 100% { transform: translate(0, 0); }
+    50%       { transform: translate(-40px, 30px); }
+}
